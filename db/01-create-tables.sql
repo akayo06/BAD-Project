@@ -13,7 +13,7 @@ create table food (
     total_fat integer,
     saturated_fat integer,
     trans_fat integer,
-    carbonhydrate integer,
+    carbonHydrate integer,
     sugars integer,
     sodium integer
 );
@@ -47,23 +47,23 @@ create table daily_nutrition_target (
     total_fat integer,
     saturated_fat integer,
     trans_fat integer,
-    carbonhydrate integer,
+    carbonHydrate integer,
     sugars integer,
     sodium integer,
     created_at timestamp not null default current_timestamp,
     updated_at timestamp
 );
-create table favourite_mealset (
+create table favorite_mealSet (
     id serial primary key,
     user integer,
 );
-create table "set" (
+create table mealSet (
     id serial primary key,
     food_id integer,
-    set_name varchar(32)
+    mealSet_name varchar(32)
 );
-create table mealset (
+create table food_in_meal (
     id serial primary key,
     food_id integer,
-    set_id integer
+    mealSet_id integer
 );
