@@ -69,7 +69,7 @@ id integer PK
 user_id integer FK >0- user.id
 mealset_name varchar(32)
 
-foodinmeal
+food_in_meal
 -------
 id integer PK
 food_id integer FK >0- food.id
