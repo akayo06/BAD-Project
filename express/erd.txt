@@ -1,0 +1,77 @@
+user
+----
+id integer PK
+username varchar(32)
+email varchar(60)
+password varchar(30)
+is_admin boolean
+created_at datetime
+updated_at datetime
+
+food
+----
+id integer PK
+name varchar(32)
+type varchar(32)
+energy integer
+protein integer
+total_fat integer
+saturated_fat integer
+trans_fat integer
+carbonhydrate integer
+sugars integer
+sodium integer
+
+diet_record
+-----------
+id integer PK
+date datetime
+user_id integer FK >0- user.id
+section enum('breakfast','lunch','dinner')
+active boolean
+created_at datetime
+updated_at datetime
+
+food_in_diet
+------------
+id integer PK
+diet_record_id integer FK >0- diet_record.id
+food_id integer FK >0- food.id
+
+shape_record
+------------
+id integer PK
+user_id integer FK >0- user.id
+date datetime
+height integer
+weight integer
+created_at datetime
+updated_at datetime
+
+daily_nutrition_target
+----------------------
+id integer PK
+user_id integer FK >0- user.id
+energy integer
+protein integer
+total_fat integer
+saturated_fat integer
+trans_fat integer
+carbonhydrate integer
+sugars integer
+sodium integer
+created_at datetime
+updated_at datetime
+
+set
+---
+id integer PK
+user_id integer FK >0- user.id
+set_name varchar(32)
+
+mealset
+-------
+id integer PK
+food_id integer FK >0- food.id
+set_id integer FK >0- set.id
+
