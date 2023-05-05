@@ -4,7 +4,7 @@ import { sessionMiddleware } from "./session";
 // import { hasLogin } from "./guards";
 
 // import { teamRoute } from "./routes/team.routes";
-import { usersRoute } from "./routes/user.routes";
+// import { usersRoute } from "./routes/user.routes";
 // import { chatRoute } from "./routes/chat.routes";
 // import { eventRoute } from "./routes/event.routes";
 // import { emailRoute } from "./routes/email.routes";
@@ -15,7 +15,7 @@ app.use(sessionMiddleware);
 app.use(express.urlencoded());
 app.use(express.json());
 
-app.use(usersRoute);
+// app.use(usersRoute);
 // app.use(teamRoute);
 // app.use(chatRoute);
 // app.use(eventRoute);

@@ -13,14 +13,14 @@ food
 id integer PK
 name varchar(32)
 type varchar(32)
-energy integer
-protein integer
-total_fat integer
-saturated_fat integer
-trans_fat integer
-carbonhydrate integer
-sugars integer
-sodium integer
+energy numeric
+protein numeric
+total_fat numeric
+saturated_fat numeric
+trans_fat numeric
+carbonhydrate numeric
+sugars numeric
+sodium numeric
 
 diet_record
 -----------
@@ -43,8 +43,8 @@ shape_record
 id integer PK
 user_id integer FK >0- user.id
 date datetime
-height integer
-weight integer
+height numeric
+weight numeric
 created_at datetime
 updated_at datetime
 
@@ -52,14 +52,14 @@ daily_nutrition_target
 ----------------------
 id integer PK
 user_id integer FK >0- user.id
-energy integer
-protein integer
-total_fat integer
-saturated_fat integer
-trans_fat integer
-carbonhydrate integer
-sugars integer
-sodium integer
+energy numeric
+protein numeric
+total_fat numeric
+saturated_fat numeric
+trans_fat numeric
+carbonhydrate numeric
+sugars numeric
+sodium numeric
 created_at datetime
 updated_at datetime
 
@@ -75,3 +75,14 @@ id integer PK
 food_id integer FK >0- food.id
 set_id integer FK >0- set.id
 
+
+# user (38, 118)
+# diet_record (23, 567)
+# food_in_diet (374, 215)
+# shape_record (975, 11)
+# daily_nutrition_target (572, 51)
+# set (847, 243)
+# mealset (1128, 308)
+# view: (129, 12)
+# food (695, 495)
+# zoom: 1.000
