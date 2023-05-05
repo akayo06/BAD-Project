@@ -63,15 +63,15 @@ sodium integer
 created_at datetime
 updated_at datetime
 
-set
+mealset
 ---
 id integer PK
 user_id integer FK >0- user.id
-set_name varchar(32)
+mealset_name varchar(32)
 
-mealset
+food_in_meal
 -------
 id integer PK
 food_id integer FK >0- food.id
-set_id integer FK >0- set.id
+mealset_id integer FK >0- set.id
 
