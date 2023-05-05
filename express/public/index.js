@@ -1,25 +1,28 @@
-const loginForm = document.querySelector("#loginForm");
-loginForm.addEventListener("submit", async function (event) {
+const homeNav = document.querySelector("#home-nav");
+const homePage = document.querySelector("#home-page");
+homeNav.root = homePage;
+
+const scanNav = document.querySelector("#scan-nav");
+const scanPage = document.querySelector("#scan-page");
+scanNav.root = scanPage;
+
+const healthNav = document.querySelector("#health-nav");
+const healthPage = document.querySelector("#health-page");
+healthNav.root = healthPage;
+
+const dietNav = document.querySelector("#diet-nav");
+const dietPage = document.querySelector("#diet-page");
+dietNav.root = dietPage;
+
+async function submitFoodPic(event) {
+  console.log("event.preventDefault()");
   event.preventDefault();
-
-  const formObject = {};
-
-  formObject["email"] = loginForm.email.value;
-  formObject["password"] = loginForm.password.value;
-
-  const response = await fetch("/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formObject),
+  let form = event.target;
+  let res = await fetch(form.action, {
+    method: form.method,
+    body: new FormData(form),
   });
-
-  const result = await response.json(); // { success: true }
-  alert(result.message);
-  console.log(`result`, result);
-  if (result.status === true) {
-    // window.location = `profile/profile.html?id=${result.id}`;
-    window.location = `/home/home.html`;
-  }
-});
+  let json = await res.json();
+  console.log(json);
+  // form.querySelector("img").src = "/uploads/" + json.filename;
+}

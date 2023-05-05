@@ -1,13 +1,8 @@
 import express, { NextFunction, Request, Response } from "express";
 import { print } from "listening-on";
 import { sessionMiddleware } from "./session";
-// import { hasLogin } from "./guards";
 
-// import { teamRoute } from "./routes/team.routes";
-// import { usersRoute } from "./routes/user.routes";
-// import { chatRoute } from "./routes/chat.routes";
-// import { eventRoute } from "./routes/event.routes";
-// import { emailRoute } from "./routes/email.routes";
+import { usersRoute } from "./routes/user.routes";
 
 const app = express();
 
@@ -15,11 +10,7 @@ app.use(sessionMiddleware);
 app.use(express.urlencoded());
 app.use(express.json());
 
-// app.use(usersRoute);
-// app.use(teamRoute);
-// app.use(chatRoute);
-// app.use(eventRoute);
-// app.use(emailRoute);
+app.use(usersRoute);
 
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
   console.error(error);

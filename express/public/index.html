@@ -5,17 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <style>
-      /* :root {
-        --ion-background-color: #3dc2ff;
-      }
-      .ios {
-        --ion-text-color: #69bb7b;
-      }
-      .md {
-        --ion-text-color: #69bb7b;
-      } */
-    </style>
+
     <script
       type="module"
       src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"
@@ -28,6 +18,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
     />
+    <link rel="stylesheet" href="/index.css" />
   </head>
   <body>
     <ion-tabs>
@@ -57,10 +48,10 @@
             <div class="scan-content">Scan food content</div>
             <div>
               <form
-                onsubmit="submitProfilePic(event)"
-                id="profile-pic"
+                onsubmit="submitFoodPic(event)"
+                id="food-pic"
                 method="POST"
-                action="/profile-pic"
+                action="/food-pic"
                 enctype="multipart/form-data"
               >
                 <input id="upload" type="file" name="image" />
@@ -115,33 +106,7 @@
         </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>
-    <script>
-      // const video = document.getElementById("video");
 
-      // function startVideo() {
-      //   navigator.getUserMedia(
-      //     { video: {} },
-      //     (stream) => (video.srcObject = stream),
-      //     (err) => console.error(err)
-      //   );
-      // }
-
-      // startVideo();
-      const homeNav = document.querySelector("#home-nav");
-      const homePage = document.querySelector("#home-page");
-      homeNav.root = homePage;
-
-      const scanNav = document.querySelector("#scan-nav");
-      const scanPage = document.querySelector("#scan-page");
-      scanNav.root = scanPage;
-
-      const healthNav = document.querySelector("#health-nav");
-      const healthPage = document.querySelector("#health-page");
-      healthNav.root = healthPage;
-
-      const dietNav = document.querySelector("#diet-nav");
-      const dietPage = document.querySelector("#diet-page");
-      dietNav.root = dietPage;
-    </script>
+    <script src="/index.js"></script>
   </body>
 </html>
