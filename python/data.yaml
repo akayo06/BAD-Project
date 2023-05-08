@@ -1,6 +1,6 @@
-train: C:\Users\pty10\workspace\BAD_Project_Food\python\train\images
-val: C:\Users\pty10\workspace\BAD_Project_Food\python\valid\images
-test: C:\Users\pty10\workspace\BAD_Project_Food\python\test\images
+train: C:\Users\pty10\workspace\BAD_Project_Food\python\dataset\train\images
+val: C:\Users\pty10\workspace\BAD_Project_Food\python\dataset\valid\images
+test: C:\Users\pty10\workspace\BAD_Project_Food\python\dataset\test\images
 
 nc: 21
 names:
