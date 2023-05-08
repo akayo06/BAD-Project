@@ -19,6 +19,11 @@
       href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
     />
     <link rel="stylesheet" href="/index.css" />
+    <style>
+      ion-content::part(scroll) {
+        position: relative;
+      }
+    </style>
   </head>
   <body>
     <ion-tabs>
@@ -26,15 +31,15 @@
         <ion-nav id="home-nav"></ion-nav>
         <div id="home-page">
           <ion-header>
-            <ion-toolbar>
+            <ion-toolbar [color]="primary">
               <div class="logo">
                 <img src="/express/img/McFitness.png" width="75" height="75" />
               </div>
               <ion-title>Welcome to McFitness</ion-title>
             </ion-toolbar>
           </ion-header>
-          <ion-content>
-            <div class="home-content">Home content</div>
+          <ion-content [fullscreen]="true" class="ion-padding">
+            <div class="home-content">This is the</div>
             <!-- <video id="video" width="720" height="560" autoplay muted></video> -->
           </ion-content>
         </div>
@@ -44,13 +49,11 @@
         <div id="scan-page">
           <ion-header>
             <ion-toolbar>
-              <div class="logo">
-                <img src="/express/img/McFitness.png" width="75" height="75" />
-              </div>
-              <ion-title>Scan food</ion-title>
+              <ion-title>Health</ion-title>
             </ion-toolbar>
           </ion-header>
-          <ion-content>
+          <ion-content [fullscreen]="true" class="ion-padding">
+            <ion-title>Scan your meal</ion-title>
             <div class="scan-content">Scan food content</div>
             <div>
               <form
