@@ -31,15 +31,18 @@
         <ion-nav id="home-nav"></ion-nav>
         <div id="home-page">
           <ion-header>
-            <ion-toolbar [color]="primary">
+            <ion-toolbar [color]="light">
               <div class="logo">
-                <img src="/express/img/McFitness.png" width="75" height="75" />
+                <ion-img
+                  src="/express/img/McFitness.png"
+                  style="width: 20%"
+                ></ion-img>
               </div>
               <ion-title>Welcome to McFitness</ion-title>
             </ion-toolbar>
           </ion-header>
           <ion-content [fullscreen]="true" class="ion-padding">
-            <div class="home-content">This is the</div>
+            <div class="home-content"></div>
             <!-- <video id="video" width="720" height="560" autoplay muted></video> -->
           </ion-content>
         </div>
@@ -53,7 +56,6 @@
             </ion-toolbar>
           </ion-header>
           <ion-content [fullscreen]="true" class="ion-padding">
-            <ion-title>Scan your meal</ion-title>
             <div class="scan-content">Scan food content</div>
             <div>
               <form
@@ -75,9 +77,6 @@
         <div id="health-page">
           <ion-header>
             <ion-toolbar>
-              <div class="logo">
-                <img src="/express/img/McFitness.png" width="75" height="75" />
-              </div>
               <ion-title>Health</ion-title>
             </ion-toolbar>
           </ion-header>
@@ -91,9 +90,6 @@
         <div id="diet-page">
           <ion-header>
             <ion-toolbar>
-              <div class="logo">
-                <img src="/express/img/McFitness.png" width="75" height="75" />
-              </div>
               <ion-title>Diet</ion-title>
             </ion-toolbar>
           </ion-header>
