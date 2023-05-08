@@ -1,0 +1,29 @@
+train: C:\Users\pty10\workspace\BAD_Project_Food\python\train\images
+val: C:\Users\pty10\workspace\BAD_Project_Food\python\valid\images
+test: C:\Users\pty10\workspace\BAD_Project_Food\python\test\images
+
+nc: 21
+names:
+  [
+    "Breakfast",
+    "Burger with Box",
+    "Burger with Package",
+    "Burger",
+    "Cold Drink",
+    "Crispy Thighs",
+    "Curly Fries",
+    "Fresh Corn Cup",
+    "Fries",
+    "Hash Browns",
+    "Hot Drink",
+    "McFlurry",
+    "McNuggets",
+    "McWings",
+    "Pie",
+    "Sundae",
+    "Twist Cone",
+    "Twisty Pasta Box",
+    "Twisty Pasta",
+    "breakfast box",
+    "salad",
+  ]

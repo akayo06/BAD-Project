@@ -1,18 +1,18 @@
-const homeNav = document.querySelector("#home-nav");
-const homePage = document.querySelector("#home-page");
-homeNav.root = homePage;
+// const homeNav = document.querySelector("#home-nav");
+// const homePage = document.querySelector("#home-page");
+// homeNav.root = homePage;
 
-const scanNav = document.querySelector("#scan-nav");
-const scanPage = document.querySelector("#scan-page");
-scanNav.root = scanPage;
+// const scanNav = document.querySelector("#scan-nav");
+// const scanPage = document.querySelector("#scan-page");
+// scanNav.root = scanPage;
 
-const healthNav = document.querySelector("#health-nav");
-const healthPage = document.querySelector("#health-page");
-healthNav.root = healthPage;
+// const healthNav = document.querySelector("#health-nav");
+// const healthPage = document.querySelector("#health-page");
+// healthNav.root = healthPage;
 
-const dietNav = document.querySelector("#diet-nav");
-const dietPage = document.querySelector("#diet-page");
-dietNav.root = dietPage;
+// const dietNav = document.querySelector("#diet-nav");
+// const dietPage = document.querySelector("#diet-page");
+// dietNav.root = dietPage;
 
 async function submitFoodPic(event) {
   console.log("event.preventDefault()");

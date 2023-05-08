@@ -1,5 +1,5 @@
 import express from "express";
-import { hashPassword, comparePassword } from "../hash";
+// import { hashPassword, comparePassword } from "../hash";
 import { form } from "../formidable";
 
 export const usersRoute = express.Router();
@@ -26,3 +26,7 @@ usersRoute.post("/food-pic", (req, res) => {
     }
   });
 });
+
+async function requestToPython() {
+  let res = await fetch("");
+}
