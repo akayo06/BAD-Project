@@ -73,5 +73,5 @@ food_in_meal
 -------
 id integer PK
 food_id integer FK >0- food.id
-mealset_id integer FK >0- set.id
+mealset_id integer FK >0- mealset.id
 
