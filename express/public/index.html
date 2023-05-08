@@ -19,104 +19,141 @@
       href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
     />
     <link rel="stylesheet" href="/index.css" />
-    <style>
-      ion-content::part(scroll) {
-        position: relative;
-      }
-    </style>
   </head>
   <body>
-    <ion-tabs>
-      <ion-tab tab="home">
-        <ion-nav id="home-nav"></ion-nav>
-        <div id="home-page">
-          <ion-header>
-            <ion-toolbar [color]="light">
-              <div class="logo">
-                <ion-img
-                  src="/express/img/McFitness.png"
-                  style="width: 20%"
-                ></ion-img>
+    <ion-app>
+      <ion-tabs>
+        <ion-tab tab="home">
+          <ion-nav id="home-nav"></ion-nav>
+          <div id="home-page">
+            <ion-header>
+              <ion-toolbar color="light">
+                <div class="logo">
+                  <ion-img
+                    src="/img/McFitness.png"
+                    style="width: 20%"
+                  ></ion-img>
+                </div>
+                <ion-title>Welcome to McFitness</ion-title>
+              </ion-toolbar>
+            </ion-header>
+            <ion-content class="ion-padding">
+              <!-- <div class="home-content infinite-scroll-content"></div> -->
+              <!-- <video id="video" width="720" height="560" autoplay muted></video> -->
+              <ion-card>
+                <img alt="Silhouette of mountains" src="/img/home1.jpg" />
+                <ion-card-header>
+                  <ion-card-title
+                    >Join and Experience the McFitness</ion-card-title
+                  >
+                  <ion-card-subtitle>Membership</ion-card-subtitle>
+                </ion-card-header>
+
+                <ion-card-content> McFitness is now working! </ion-card-content>
+              </ion-card>
+              <ion-card>
+                <img alt="Silhouette of mountains" src="/img/home1.jpg" />
+                <ion-card-header>
+                  <ion-card-title
+                    >Join and Experience the McFitness</ion-card-title
+                  >
+                  <ion-card-subtitle>Membership</ion-card-subtitle>
+                </ion-card-header>
+
+                <ion-card-content> McFitness is now working! </ion-card-content>
+              </ion-card>
+              <ion-card>
+                <img alt="Silhouette of mountains" src="/img/home1.jpg" />
+                <ion-card-header>
+                  <ion-card-title
+                    >Join and Experience the McFitness</ion-card-title
+                  >
+                  <ion-card-subtitle>Membership</ion-card-subtitle>
+                </ion-card-header>
+
+                <ion-card-content> McFitness is now working! </ion-card-content>
+              </ion-card>
+            </ion-content>
+          </div>
+        </ion-tab>
+        <ion-tab tab="scan">
+          <ion-nav id="scan-nav"></ion-nav>
+          <div id="scan-page">
+            <ion-header>
+              <ion-toolbar>
+                <ion-title>Health</ion-title>
+              </ion-toolbar>
+            </ion-header>
+            <ion-content [fullscreen]="true" class="ion-padding">
+              <div class="scan-content">Scan food content</div>
+              <div>
+                <form
+                  onsubmit="submitFoodPic(event)"
+                  id="food-pic"
+                  method="POST"
+                  action="/food-pic"
+                  enctype="multipart/form-data"
+                >
+                  <input id="upload" type="file" name="image" />
+                  <input id="submitPhoto" type="submit" value="Submit" />
+                </form>
+                <!-- <ion-alert
+                  trigger="submitPhoto"
+                  header="Alert"
+                  subHeader="Important message"
+                  message="Please select photo!"
+                  [buttons]="alertButtons"
+                ></ion-alert> -->
               </div>
-              <ion-title>Welcome to McFitness</ion-title>
-            </ion-toolbar>
-          </ion-header>
-          <ion-content [fullscreen]="true" class="ion-padding">
-            <div class="home-content"></div>
-            <!-- <video id="video" width="720" height="560" autoplay muted></video> -->
-          </ion-content>
-        </div>
-      </ion-tab>
-      <ion-tab tab="scan">
-        <ion-nav id="scan-nav"></ion-nav>
-        <div id="scan-page">
-          <ion-header>
-            <ion-toolbar>
-              <ion-title>Health</ion-title>
-            </ion-toolbar>
-          </ion-header>
-          <ion-content [fullscreen]="true" class="ion-padding">
-            <div class="scan-content">Scan food content</div>
-            <div>
-              <form
-                onsubmit="submitFoodPic(event)"
-                id="food-pic"
-                method="POST"
-                action="/food-pic"
-                enctype="multipart/form-data"
-              >
-                <input id="upload" type="file" name="image" />
-                <input id="submit" type="submit" value="Submit" />
-              </form>
-            </div>
-          </ion-content>
-        </div>
-      </ion-tab>
-      <ion-tab tab="health">
-        <ion-nav id="health-nav"></ion-nav>
-        <div id="health-page">
-          <ion-header>
-            <ion-toolbar>
-              <ion-title>Health</ion-title>
-            </ion-toolbar>
-          </ion-header>
-          <ion-content>
-            <div class="health-content">Health content</div>
-          </ion-content>
-        </div>
-      </ion-tab>
-      <ion-tab tab="diet">
-        <ion-nav id="diet-nav"></ion-nav>
-        <div id="diet-page">
-          <ion-header>
-            <ion-toolbar>
-              <ion-title>Diet</ion-title>
-            </ion-toolbar>
-          </ion-header>
-          <ion-content>
-            <div class="diet-content">Diet content</div>
-          </ion-content>
-        </div>
-      </ion-tab>
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="home">
-          <ion-icon name="home-outline"></ion-icon>
-          Home
-        </ion-tab-button>
-        <ion-tab-button tab="scan">
-          <ion-icon name="scan"></ion-icon>
-          Scan food
-        </ion-tab-button>
-        <ion-tab-button tab="health">
-          <ion-icon name="body-outline"></ion-icon>
-          Health
-        </ion-tab-button>
-        <ion-tab-button tab="diet">
-          <ion-icon name="fast-food-outline"></ion-icon>
-          Diet record
-        </ion-tab-button>
-      </ion-tab-bar>
-    </ion-tabs>
+            </ion-content>
+          </div>
+        </ion-tab>
+        <ion-tab tab="health">
+          <ion-nav id="health-nav"></ion-nav>
+          <div id="health-page">
+            <ion-header>
+              <ion-toolbar>
+                <ion-title>Health</ion-title>
+              </ion-toolbar>
+            </ion-header>
+            <ion-content>
+              <div class="health-content">Health content</div>
+            </ion-content>
+          </div>
+        </ion-tab>
+        <ion-tab tab="diet">
+          <ion-nav id="diet-nav"></ion-nav>
+          <div id="diet-page">
+            <ion-header>
+              <ion-toolbar>
+                <ion-title>Diet</ion-title>
+              </ion-toolbar>
+            </ion-header>
+            <ion-content>
+              <div class="diet-content">Diet content</div>
+            </ion-content>
+          </div>
+        </ion-tab>
+        <ion-tab-bar slot="bottom">
+          <ion-tab-button tab="home">
+            <ion-icon name="home-outline"></ion-icon>
+            Home
+          </ion-tab-button>
+          <ion-tab-button tab="scan">
+            <ion-icon name="scan"></ion-icon>
+            Scan food
+          </ion-tab-button>
+          <ion-tab-button tab="health">
+            <ion-icon name="body-outline"></ion-icon>
+            Health
+          </ion-tab-button>
+          <ion-tab-button tab="diet">
+            <ion-icon name="fast-food-outline"></ion-icon>
+            Diet record
+          </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs>
+    </ion-app>
 
     <script src="/index.js"></script>
   </body>
