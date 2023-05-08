@@ -29,8 +29,8 @@ app.use("/uploads", express.static("uploads"));
 app.use(express.static("public"));
 app.use(express.static("private"));
 
-let port = 8000;
-app.listen(8000, () => {
+let port = 8100;
+app.listen(port, () => {
   console.log(`start`);
   print(port);
 });
