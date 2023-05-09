@@ -4,4 +4,4 @@ __pycache__
 python/dataset
 python/runs
 uploads/
-vars
+.env
