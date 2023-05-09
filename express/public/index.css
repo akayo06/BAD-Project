@@ -16,3 +16,20 @@
   line-height: 30px; /* To center it vertically */
   color: white;
 }
+
+#toolbarGrid{
+  margin: 0vw 2vw;
+}
+#McFitnessLogo{
+  height: 17vw;
+  justify-content: start;
+  margin-left: -2vw;
+}
+
+#avatarCircle {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 15vw;
+  height: 15vw;
+  margin-top: 1vw;
+}

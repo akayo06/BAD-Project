@@ -27,18 +27,21 @@
           <ion-nav id="home-nav"></ion-nav>
           <div id="home-page">
             <ion-header>
-              <ion-toolbar color="light" id="toolbar">
-                <div class="logo">
-                  <ion-img
-                    src="/img/McFitness.png"
-                    style="width: 50%"
-                  ></ion-img>
-                  <ion-img
-                    id="userAvatar"
-                    src="/img/male.jpg"
-                    style="width: 15%; --border-radius: 15px !important"
-                  ></ion-img>
-                </div>
+              <ion-toolbar color="light">
+                <ion-grid id="toolbarGrid">
+                  <ion-row class="ion-justify-content-between">
+                    <ion-img
+                      id="McFitnessLogo"
+                      size="10"
+                      src="/img/McFitness.png"
+                    ></ion-img>
+                    <ion-img
+                      id="avatarCircle"
+                      size="3"
+                      src="/img/male.jpg"
+                    ></ion-img>
+                  </ion-row>
+                </ion-grid>
               </ion-toolbar>
             </ion-header>
             <ion-content class="ion-padding">
@@ -84,8 +87,21 @@
           <ion-nav id="scan-nav"></ion-nav>
           <div id="scan-page">
             <ion-header>
-              <ion-toolbar>
-                <ion-title>Health</ion-title>
+              <ion-toolbar color="light">
+                <ion-grid id="toolbarGrid">
+                  <ion-row class="ion-justify-content-between">
+                    <ion-img
+                      id="McFitnessLogo"
+                      size="10"
+                      src="/img/McFitness.png"
+                    ></ion-img>
+                    <ion-img
+                      id="avatarCircle"
+                      size="3"
+                      src="/img/male.jpg"
+                    ></ion-img>
+                  </ion-row>
+                </ion-grid>
               </ion-toolbar>
             </ion-header>
             <ion-content [fullscreen]="true" class="ion-padding">
@@ -144,8 +160,21 @@
           <ion-nav id="health-nav"></ion-nav>
           <div id="health-page">
             <ion-header>
-              <ion-toolbar>
-                <ion-title>Health</ion-title>
+              <ion-toolbar color="light">
+                <ion-grid id="toolbarGrid">
+                  <ion-row class="ion-justify-content-between">
+                    <ion-img
+                      id="McFitnessLogo"
+                      size="10"
+                      src="/img/McFitness.png"
+                    ></ion-img>
+                    <ion-img
+                      id="avatarCircle"
+                      size="3"
+                      src="/img/male.jpg"
+                    ></ion-img>
+                  </ion-row>
+                </ion-grid>
               </ion-toolbar>
             </ion-header>
             <ion-content>
@@ -157,8 +186,21 @@
           <ion-nav id="diet-nav"></ion-nav>
           <div id="diet-page">
             <ion-header>
-              <ion-toolbar>
-                <ion-title>Diet</ion-title>
+              <ion-toolbar color="light">
+                <ion-grid id="toolbarGrid">
+                  <ion-row class="ion-justify-content-between">
+                    <ion-img
+                      id="McFitnessLogo"
+                      size="10"
+                      src="/img/McFitness.png"
+                    ></ion-img>
+                    <ion-img
+                      id="avatarCircle"
+                      size="3"
+                      src="/img/male.jpg"
+                    ></ion-img>
+                  </ion-row>
+                </ion-grid>
               </ion-toolbar>
             </ion-header>
             <ion-content>
