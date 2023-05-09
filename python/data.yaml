@@ -1,14 +1,14 @@
-train: C:\Users\pty10\workspace\BAD_Project_Food\python\train\images
-val: C:\Users\pty10\workspace\BAD_Project_Food\python\valid\images
-test: C:\Users\pty10\workspace\BAD_Project_Food\python\test\images
+train: C:\Users\pty10\workspace\BAD_Project_Food\python\dataset\train\images
+val: C:\Users\pty10\workspace\BAD_Project_Food\python\dataset\valid\images
+test: C:\Users\pty10\workspace\BAD_Project_Food\python\dataset\test\images
 
 nc: 21
 names:
   [
     "Breakfast",
+    "Burger",
     "Burger with Box",
     "Burger with Package",
-    "Burger",
     "Cold Drink",
     "Crispy Thighs",
     "Curly Fries",
@@ -22,8 +22,15 @@ names:
     "Pie",
     "Sundae",
     "Twist Cone",
-    "Twisty Pasta Box",
     "Twisty Pasta",
+    "Twisty Pasta Box",
     "breakfast box",
     "salad",
   ]
+
+roboflow:
+  workspace: clifford-lee-hpmx7
+  project: mcdonalds-x7oyz
+  version: 6
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/clifford-lee-hpmx7/mcdonalds-x7oyz/dataset/6

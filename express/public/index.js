@@ -24,5 +24,6 @@ async function submitFoodPic(event) {
   });
   let json = await res.json();
   console.log(json);
-  // form.querySelector("img").src = "/uploads/" + json.filename;
+  form.querySelector("img").src = "../uploads/" + json.out_filename;
+  form.querySelector(".label").innerHTML = json.labels[0].label;
 }
