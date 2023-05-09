@@ -22,8 +22,39 @@ async function submitFoodPic(event) {
     method: form.method,
     body: new FormData(form),
   });
+  await move();
   let json = await res.json();
   console.log(json);
+  form.querySelector("img").hidden = false;
   form.querySelector("img").src = "../uploads/" + json.out_filename;
-  form.querySelector(".label").innerHTML = json.labels[0].label;
+  for (let item of json.labels) {
+    form.querySelector(".label").innerHTML += item.label + ", ";
+  }
+  let foodLabel = form.querySelector(".label");
+  foodLabel.innerHTML = foodLabel.innerHTML.slice(
+    0,
+    foodLabel.innerHTML.length - 2
+  );
+}
+
+let i = 0;
+async function move() {
+  document.querySelector("#myProgress").hidden = false;
+  if (i == 0) {
+    i = 1;
+    let elem = document.getElementById("myBar");
+    let width = 10;
+    let id = setInterval(frame, 10);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+        i = 0;
+      } else {
+        width++;
+        elem.style.width = width + "%";
+        elem.innerHTML = width + "%";
+      }
+    }
+  }
+  // document.querySelector("#myProgress").hidden = true;
 }

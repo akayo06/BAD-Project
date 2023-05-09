@@ -4,4 +4,7 @@ __pycache__
 python/dataset
 python/runs
 uploads/
+express/backup
+.env
+
 .env

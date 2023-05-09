@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <title>Add image to alert / confirmation box.</title>
+    <!-- jquery CDN for dialog boxes -->
+    <link
+      href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+      rel="stylesheet"
+    />
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <!-- CSS -->
+    <style>
+      .ui-widget-header {
+        background: lightgreen;
+        color: blue;
+        font-size: 20px;
+      }
+      #dialog {
+        text-align: center;
+      }
+      img {
+        width: 150px;
+        height: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Add image to alert / confirmation box.</h2>
+    <h4>Show image in the dialog box using the jQuery dialog() method.</h4>
+    <!-- content of the dialog box. -->
+    <div id="imgInDialog" title="Confirmation box">
+      <p>Is this the picture you wish to detect?</p>
+      <img src="" alt="detect_pic" />
+      <button>Back</button>
+      <button>Yes</button>
+    </div>
+    <script>
+      // open the imgInDialog div in the dialog box.
+      $(function () {
+        $("#imgInDialog").dialog();
+      });
+    </script>
+  </body>
+</html>
