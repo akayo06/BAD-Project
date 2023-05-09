@@ -5,3 +5,5 @@ express/.env
 python/dataset
 python/runs
 uploads/
+express/backup
+.env
