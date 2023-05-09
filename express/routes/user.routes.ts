@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 // import { hashPassword, comparePassword } from "../hash";
 import { newForm } from "../formidable";
+import { knex } from "../main";
 
 export const usersRoute = express.Router();
 
@@ -20,8 +21,30 @@ usersRoute.post("/food-pic", (req, res) => {
       let image = Array.isArray(files.image) ? files.image[0] : files.image;
       let filename = image?.newFilename;
       console.log({ filename });
-      let json = await requestToPython(filename);
-      res.json(json);
+      let { out_filename, items } = await requestToPython(filename);
+      for (let item of items) {
+        console.log(item);
+        if (item.label.includes("Burger")) {
+          item.label = "Burger";
+        }
+        let suggestions = await knex("food")
+          .select(
+            "id",
+            "name",
+            "type",
+            "energy",
+            "protein",
+            "total_fat",
+            "saturated_fat",
+            "trans_fat",
+            "sugars",
+            "sodium"
+          )
+          .where("type", "like", "%" + item.label + "%");
+        item.suggestions = suggestions;
+      }
+
+      res.json({ out_filename, items });
     } catch (err) {
       console.log(err);
 
@@ -43,6 +66,6 @@ async function requestToPython(in_filename: string) {
   let json = await res.json();
   return {
     out_filename,
-    labels: json,
+    items: json,
   };
 }
