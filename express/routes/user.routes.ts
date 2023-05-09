@@ -27,6 +27,9 @@ usersRoute.post("/food-pic", (req, res) => {
         if (item.label.includes("Burger")) {
           item.label = "Burger";
         }
+        if (item.label.includes("Twisty")) {
+          item.label = "Twisty Pasta";
+        }
         let suggestions = await knex("food")
           .select(
             "id",

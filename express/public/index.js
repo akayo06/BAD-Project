@@ -51,6 +51,7 @@ async function submitFoodPic(event) {
 
     // form.querySelector(".items").innerHTML += item.label;
   }
+  document.querySelector(".confirm-button").style.display = "inline-block";
   // form.querySelector("#calculate-calories").hidden = false;
 
   // let foodLabel = form.querySelector(".label");
