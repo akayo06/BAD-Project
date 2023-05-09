@@ -64,13 +64,13 @@ async function submitFoodPic(event) {
     // form.querySelector(".items").innerHTML += item.label;
   }
   document.querySelector(".confirm-button").style.display = "inline-block";
-  let confirmBtn = document.querySelector("#confirmBtn");
-  let selectAll = document.querySelectorAll(".selectedFood")
-  confirmBtn.addEventListener("click",function(){
+  let calculateCalories = document.querySelector("#calculateCalories");
+  let selectedAllFood = document.querySelectorAll(".selectedFood")
+  calculateCalories.addEventListener("click",function(){
     let foodItems = []
-    for (selectItem of selectAll){
-      if(selectItem.style.display != "none"){
-        let splitArray = selectItem.getAttribute("aria-label").split(",")
+    for (selectedFood of selectedAllFood){
+      if(selectedFood.style.display != "none"){
+        let splitArray = selectedFood.getAttribute("aria-label").split(",")
         if(splitArray.length == 1){
           console.log("Have error")
           return
