@@ -66,12 +66,13 @@ async function submitFoodPic(event) {
   document.querySelector(".confirm-button").style.display = "inline-block";
   let confirmBtn = document.querySelector("#confirmBtn");
   let selectAll = document.querySelectorAll("ion-select")
-
+  confirmBtn.addEventListener("click",function(){
+    for (selectItem of selectAll){
+      if(selectItem.style.display != "none"){
+        console.log(selectItem.getAttribute("aria-label"))}
+    }
+  })
   
-
-  confirmBtn.addEventListener("click",function(){for (selectItem of selectAll){if(selectItem.style.display != "none"){console.log(selectItem.getAttribute("aria-label"))}}})
-  
-
   // form.querySelector("#calculate-calories").hidden = false;
 
   // let foodLabel = form.querySelector(".label");
