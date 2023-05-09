@@ -7,3 +7,6 @@
       .md {
         --ion-text-color: #69bb7b;
       } */
+#toolbar {
+  display: flex !important;
+}
