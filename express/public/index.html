@@ -27,14 +27,18 @@
           <ion-nav id="home-nav"></ion-nav>
           <div id="home-page">
             <ion-header>
-              <ion-toolbar color="light">
+              <ion-toolbar color="light" id="toolbar">
                 <div class="logo">
                   <ion-img
                     src="/img/McFitness.png"
-                    style="width: 20%"
+                    style="width: 50%"
+                  ></ion-img>
+                  <ion-img
+                    id="userAvatar"
+                    src="/img/male.jpg"
+                    style="width: 15%; --border-radius: 15px !important"
                   ></ion-img>
                 </div>
-                <ion-title>Welcome to McFitness</ion-title>
               </ion-toolbar>
             </ion-header>
             <ion-content class="ion-padding">
@@ -159,6 +163,7 @@
             </ion-header>
             <ion-content>
               <div class="diet-content">Diet content</div>
+              <div class="graph"></div>
             </ion-content>
           </div>
         </ion-tab>

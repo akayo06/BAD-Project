@@ -1,7 +1,6 @@
 .pyenv
 node_modules
 __pycache__
-express/.env
 python/dataset
 python/runs
 uploads/
