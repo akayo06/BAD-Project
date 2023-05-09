@@ -36,10 +36,12 @@ async function submitFoodPic(event) {
     let label = document.createElement("ion-label");
     let select = document.createElement("ion-select");
     let button = document.createElement("ion-icon");
-    
+
+    select.classList.add("selectedFood")
 
     label.textContent = item.label;
     button.name = "close-outline";
+    button.style.zIndex= "999";
     
     button.addEventListener("click", function(){
       node.style.display = "none";
@@ -57,20 +59,26 @@ async function submitFoodPic(event) {
     node.appendChild(label);
     node.appendChild(select);
     items.appendChild(node);
-    items.appendChild(button);
+    node.appendChild(button);
     
-    
-
     // form.querySelector(".items").innerHTML += item.label;
   }
   document.querySelector(".confirm-button").style.display = "inline-block";
   let confirmBtn = document.querySelector("#confirmBtn");
-  let selectAll = document.querySelectorAll("ion-select")
+  let selectAll = document.querySelectorAll(".selectedFood")
   confirmBtn.addEventListener("click",function(){
+    let foodItems = []
     for (selectItem of selectAll){
       if(selectItem.style.display != "none"){
-        console.log(selectItem.getAttribute("aria-label"))}
+        let splitArray = selectItem.getAttribute("aria-label").split(",")
+        if(splitArray.length == 1){
+          console.log("Have error")
+          return
+        }
+        foodItems.push(splitArray[0])
+      }
     }
+    console.log(foodItems)
   })
   
   // form.querySelector("#calculate-calories").hidden = false;
