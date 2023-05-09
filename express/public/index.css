@@ -17,10 +17,10 @@
   color: white;
 }
 
-#toolbarGrid{
+#toolbarGrid {
   margin: 0vw 2vw;
 }
-#McFitnessLogo{
+#McFitnessLogo {
   height: 17vw;
   justify-content: start;
   margin-left: -2vw;
@@ -32,4 +32,8 @@
   width: 15vw;
   height: 15vw;
   margin-top: 1vw;
+}
+
+.confirm-button {
+  display: none;
 }

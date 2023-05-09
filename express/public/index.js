@@ -63,6 +63,7 @@ async function submitFoodPic(event) {
 
     // form.querySelector(".items").innerHTML += item.label;
   }
+  document.querySelector(".confirm-button").style.display = "inline-block";
   let confirmBtn = document.querySelector("#confirmBtn");
   let selectAll = document.querySelectorAll("ion-select")
 
