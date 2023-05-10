@@ -79,6 +79,8 @@ async function submitFoodPic(event) {
           return;
         }
         foodItems.push(splitArray[0]);
+        document.querySelector("#calculatedNutritionValue").style.display =
+          "inline";
       }
     }
     console.log(foodItems);

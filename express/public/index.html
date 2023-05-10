@@ -152,43 +152,49 @@
                       >Calculate Calories</ion-button
                     >
                   </div>
-                  <div class="result"></div>
-                  <template>
-                    <ion-grid id="result">
-                      <ion-row>
-                        <ion-col size="10">Energy</ion-col>
-                        <ion-col size="2" id="energy"></ion-col>
-                      </ion-row>
-                      <ion-row>
-                        <ion-col size="10">Protein</ion-col>
-                        <ion-col size="2" id="protein"></ion-col>
-                      </ion-row>
-                      <ion-row>
-                        <ion-col size="10">Total Fat</ion-col>
-                        <ion-col size="2" id="total_fat"></ion-col>
-                      </ion-row>
-                      <ion-row>
-                        <ion-col size="10">Saturated Fat</ion-col>
-                        <ion-col size="2" id="saturated_fat"></ion-col>
-                      </ion-row>
-                      <ion-row>
-                        <ion-col size="10">Trans Fat</ion-col>
-                        <ion-col size="2" id="trans_fat"></ion-col>
-                      </ion-row>
-                      <ion-row>
-                        <ion-col size="10">Carbohydrates</ion-col>
-                        <ion-col size="2" id="carbohydrates"></ion-col>
-                      </ion-row>
-                      <ion-row>
-                        <ion-col size="10">Sugar</ion-col>
-                        <ion-col size="2" id="sugar"></ion-col>
-                      </ion-row>
-                      <ion-row>
-                        <ion-col size="10">Sodium</ion-col>
-                        <ion-col size="2" id="sodium"></ion-col>
-                      </ion-row>
-                    </ion-grid>
-                  </template>
+                  <ion-grid id="calculatedNutritionValue">
+                    <h2 class="ion-text-center" id="calculatedResultTitle">
+                      Result
+                    </h2>
+                    <ion-row class="nutritionTable">
+                      <ion-col class="ion-text-start">Energy</ion-col>
+                      <ion-col class="ion-text-end" id="energy"></ion-col>
+                    </ion-row>
+                    <ion-row class="nutritionTable">
+                      <ion-col class="ion-text-start">Protein</ion-col>
+                      <ion-col class="ion-text-end" id="protein"></ion-col>
+                    </ion-row>
+                    <ion-row class="nutritionTable">
+                      <ion-col class="ion-text-start">Total Fat</ion-col>
+                      <ion-col class="ion-text-end" id="total_fat"></ion-col>
+                    </ion-row>
+                    <ion-row class="nutritionTable">
+                      <ion-col class="ion-text-start">Saturated Fat</ion-col>
+                      <ion-col
+                        class="ion-text-end"
+                        id="saturated_fat"
+                      ></ion-col>
+                    </ion-row>
+                    <ion-row class="nutritionTable">
+                      <ion-col class="ion-text-start">Trans Fat</ion-col>
+                      <ion-col class="ion-text-end" id="trans_fat"></ion-col>
+                    </ion-row>
+                    <ion-row class="nutritionTable">
+                      <ion-col class="ion-text-start">Carbohydrates</ion-col>
+                      <ion-col
+                        class="ion-text-end"
+                        id="carbohydrates"
+                      ></ion-col>
+                    </ion-row>
+                    <ion-row class="nutritionTable">
+                      <ion-col class="ion-text-start">Sugar</ion-col>
+                      <ion-col class="ion-text-end" id="sugar"></ion-col>
+                    </ion-row>
+                    <ion-row class="nutritionTable">
+                      <ion-col class="ion-text-start">Sodium</ion-col>
+                      <ion-col class="ion-text-end" id="sodium"></ion-col>
+                    </ion-row>
+                  </ion-grid>
                   <ion-list class="calories-result"></ion-list>
                 </form>
 
