@@ -84,6 +84,7 @@ async function submitFoodPic(event) {
     }
     console.log(foodItems);
 
+    let calories = [];
     let result = form.querySelector(".calories-result");
     for (foodItem of foodItems) {
       for (suggestion of json.item) {
