@@ -34,13 +34,13 @@
   margin-top: 1vw;
 }
 
-#calculateCalories, #calculatedNutritionValue {
+#calculateCalories {
   display: none;
 }
 
 .nutritionTable {
   margin: 2vw;
 }
-#calculatedResultTitle{
+#calculatedResultTitle {
   margin-top: 2vw;
 }

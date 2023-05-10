@@ -79,8 +79,8 @@ async function submitFoodPic(event) {
           return;
         }
         foodItems.push(splitArray[0]);
-        document.querySelector("#calculatedNutritionValue").style.display =
-          "inline";
+        // document.querySelector("#calculatedNutritionValue").style.display =
+        //   "inline";
       }
     }
     console.log(foodItems);
@@ -129,7 +129,9 @@ async function submitFoodPic(event) {
       total_trans_fat += parseFloat(food.trans_fat);
       total_carbohydrate += parseFloat(food.carbohydrate);
     }
-    let node = template.content.querySelector("#result").cloneNode(true);
+    let node = template.content
+      .querySelector("#calculatedNutritionValue")
+      .cloneNode(true);
 
     node.querySelector("#energy").textContent = total_energy + ` kcal`;
     node.querySelector("#protein").textContent =
@@ -145,7 +147,7 @@ async function submitFoodPic(event) {
     node.querySelector("#sugar").textContent = total_sugars.toFixed(1) + ` g`;
     node.querySelector("#sodium").textContent = total_sodium + ` mg`;
 
-    document.querySelector(".result").appendChild(node);
+    document.querySelector(".total_calculated_result").appendChild(node);
   });
 }
 
