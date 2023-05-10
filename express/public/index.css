@@ -34,6 +34,13 @@
   margin-top: 1vw;
 }
 
-#calculateCalories {
+#calculateCalories, #calculatedNutritionValue {
   display: none;
+}
+
+.nutritionTable {
+  margin: 2vw;
+}
+#calculatedResultTitle{
+  margin-top: 2vw;
 }
