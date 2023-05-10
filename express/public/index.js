@@ -36,41 +36,42 @@ async function submitFoodPic(event) {
     let label = document.createElement("ion-label");
     let select = document.createElement("ion-select");
     let button = document.createElement("ion-icon");
-    
 
     label.textContent = item.label;
     button.name = "close-outline";
-    
-    button.addEventListener("click", function(){
+
+    button.addEventListener("click", function () {
       node.style.display = "none";
       select.style.display = "none";
-      button.style.display = "none"})
+      button.style.display = "none";
+    });
 
     for (let suggestion of item.suggestions) {
       let option = document.createElement("ion-select-option");
       option.value = suggestion.id;
       option.textContent = suggestion.name;
       select.appendChild(option);
-      
     }
-    
+
     node.appendChild(label);
     node.appendChild(select);
     items.appendChild(node);
     items.appendChild(button);
-    
-    
 
     // form.querySelector(".items").innerHTML += item.label;
   }
+
   document.querySelector(".confirm-button").style.display = "inline-block";
   let confirmBtn = document.querySelector("#confirmBtn");
-  let selectAll = document.querySelectorAll("ion-select")
+  let selectAll = document.querySelectorAll("ion-select");
 
-  
-
-  confirmBtn.addEventListener("click",function(){for (selectItem of selectAll){if(selectItem.style.display != "none"){console.log(selectItem.getAttribute("aria-label"))}}})
-  
+  confirmBtn.addEventListener("click", function () {
+    for (selectItem of selectAll) {
+      if (selectItem.style.display != "none") {
+        console.log(selectItem.getAttribute("aria-label"));
+      }
+    }
+  });
 
   // form.querySelector("#calculate-calories").hidden = false;
 
