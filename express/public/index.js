@@ -64,7 +64,7 @@ async function submitFoodPic(event) {
     // form.querySelector(".items").innerHTML += item.label;
   }
 
-  document.querySelector(".confirm-button").style.display = "inline-block";
+  document.querySelector("#calculateCalories").style.display = "inline-block";
 
   let calculateCalories = document.querySelector("#calculateCalories");
   let selectedAllFood = document.querySelectorAll(".selectedFood");
@@ -78,6 +78,7 @@ async function submitFoodPic(event) {
           return;
         }
         foodItems.push(splitArray[0]);
+
       }
     }
     console.log(foodItems);
