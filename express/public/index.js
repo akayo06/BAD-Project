@@ -170,3 +170,13 @@ function move() {
     }
   });
 }
+
+let dateTime = document.querySelector("ion-dateTime")
+let selectedDate = document.querySelector("#selectedDate")
+let dateTimeAccordion = document.querySelector("#dateTimeAccordion")
+dateTime.addEventListener("click", function() {
+  let dateTimeFormat = dateTime.value.toString().split("T")
+  console.log(dateTimeFormat)
+  selectedDate.textContent = dateTimeFormat[0];
+  dateTimeAccordion.onClick
+})
