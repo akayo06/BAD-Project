@@ -38,6 +38,10 @@
   display: none;
 }
 
+#calculateCalories {
+  margin-top: 2vw;
+}
+
 .nutritionTable {
   margin: 2vw;
 }
