@@ -35,10 +35,6 @@
 }
 
 #calculateCalories {
-  display: none;
-}
-
-#calculateCalories {
   margin-top: 2vw;
 }
 
@@ -47,4 +43,8 @@
 }
 #calculatedResultTitle {
   margin-top: 2vw;
+}
+
+.hidden {
+  display: none;
 }
