@@ -71,6 +71,7 @@ async function submitFoodPic(event) {
   calculateCalories.addEventListener("click", function () {
     let foodItems = [];
     for (selectedFood of selectedAllFood) {
+      console.log(`select food`, selectedFood);
       if (selectedFood.style.display != "none") {
         let splitArray = selectedFood.getAttribute("aria-label").split(",");
         if (splitArray.length == 1) {
@@ -78,19 +79,71 @@ async function submitFoodPic(event) {
           return;
         }
         foodItems.push(splitArray[0]);
-
       }
     }
     console.log(foodItems);
 
-    let calories = [];
-    let result = form.querySelector(".calories-result");
-    for (foodItem of foodItems) {
-      for (suggestion of json.item) {
-        if (foodItem == suggestion) {
+    let nutrition = [];
+    // let result = form.querySelector(".calories-result");
+    for (let food of foodItems) {
+      for (let item of json.items) {
+        for (let suggestion of item.suggestions) {
+          if (food == suggestion.name) {
+            nutrition.push({
+              id: suggestion.id,
+              name: suggestion.name,
+              energy: suggestion.energy,
+              protein: suggestion.protein,
+              saturated_fat: suggestion.saturated_fat,
+              sodium: suggestion.sodium,
+              sugars: suggestion.sugars,
+              total_fat: suggestion.total_fat,
+              trans_fat: suggestion.trans_fat,
+              carbohydrate: suggestion.carbonhydrate,
+            });
+          }
         }
       }
     }
+    console.log(nutrition);
+    let template = document.querySelector("template");
+    let total_energy = 0;
+    let total_protein = 0;
+    let total_saturated_fat = 0;
+    let total_sodium = 0;
+    let total_sugars = 0;
+    let total_total_fat = 0;
+    let total_trans_fat = 0;
+    let total_carbohydrate = 0;
+
+    for (let food of nutrition) {
+      console.log(parseFloat(food.energy));
+      total_energy += parseFloat(food.energy);
+      total_protein += parseFloat(food.protein);
+      total_saturated_fat += parseFloat(food.saturated_fat);
+      total_sodium += parseFloat(food.sodium);
+      total_sugars += parseFloat(food.sugars);
+      total_total_fat += parseFloat(food.total_fat);
+      total_trans_fat += parseFloat(food.trans_fat);
+      total_carbohydrate += parseFloat(food.carbohydrate);
+    }
+    let node = template.content.querySelector("#result").cloneNode(true);
+
+    node.querySelector("#energy").textContent = total_energy + ` kcal`;
+    node.querySelector("#protein").textContent =
+      total_protein.toFixed(1) + ` g`;
+    node.querySelector("#total_fat").textContent =
+      total_total_fat.toFixed(1) + ` g`;
+    node.querySelector("#saturated_fat").textContent =
+      total_saturated_fat.toFixed(1) + ` g`;
+    node.querySelector("#trans_fat").textContent =
+      total_trans_fat.toFixed(1) + ` g`;
+    node.querySelector("#carbohydrates").textContent =
+      total_carbohydrate.toFixed(1) + ` g`;
+    node.querySelector("#sugar").textContent = total_sugars.toFixed(1) + ` g`;
+    node.querySelector("#sodium").textContent = total_sodium + ` mg`;
+
+    document.querySelector(".result").appendChild(node);
   });
 }
 
