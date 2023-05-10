@@ -119,7 +119,6 @@ async function submitFoodPic(event) {
     let total_carbohydrate = 0;
 
     for (let food of nutrition) {
-      console.log(parseFloat(food.energy));
       total_energy += parseFloat(food.energy);
       total_protein += parseFloat(food.protein);
       total_saturated_fat += parseFloat(food.saturated_fat);
