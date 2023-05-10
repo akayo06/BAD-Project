@@ -35,18 +35,18 @@ async function submitFoodPic(event) {
     let node = document.createElement("ion-item");
     let label = document.createElement("ion-label");
     let select = document.createElement("ion-select");
-    let button = document.createElement("ion-icon");
+    let delBtn = document.createElement("ion-icon");
 
     select.classList.add("selectedFood");
 
     label.textContent = item.label;
-    button.name = "close-outline";
-    button.style.zIndex = "999";
+    delBtn.name = "close-outline";
+    delBtn.style.zIndex = "999";
 
-    button.addEventListener("click", function () {
+    delBtn.addEventListener("click", function () {
       node.style.display = "none";
       select.style.display = "none";
-      button.style.display = "none";
+      delBtn.style.display = "none";
     });
 
     for (let suggestion of item.suggestions) {
@@ -59,12 +59,13 @@ async function submitFoodPic(event) {
     node.appendChild(label);
     node.appendChild(select);
     items.appendChild(node);
-    node.appendChild(button);
+    node.appendChild(delBtn);
 
     // form.querySelector(".items").innerHTML += item.label;
   }
 
   document.querySelector(".confirm-button").style.display = "inline-block";
+
   let calculateCalories = document.querySelector("#calculateCalories");
   let selectedAllFood = document.querySelectorAll(".selectedFood");
   calculateCalories.addEventListener("click", function () {
@@ -80,15 +81,15 @@ async function submitFoodPic(event) {
       }
     }
     console.log(foodItems);
+
+    let result = form.querySelector(".calories-result");
+    for (foodItem of foodItems) {
+      for (suggestion of json.item) {
+        if (foodItem == suggestion) {
+        }
+      }
+    }
   });
-
-  // form.querySelector("#calculate-calories").hidden = false;
-
-  // let foodLabel = form.querySelector(".label");
-  // foodLabel.innerHTML = foodLabel.innerHTML.slice(
-  //   0,
-  //   foodLabel.innerHTML.length - 2
-  // );
 }
 
 function move() {
