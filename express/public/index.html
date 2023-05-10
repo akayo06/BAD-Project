@@ -116,7 +116,7 @@
                     <ion-accordion-group>
                       <ion-accordion value="start">
                         <ion-item slot="header">
-                          <ion-label>Meal date</ion-label>
+                          <ion-label>Meal Date</ion-label>
                           <ion-label
                             id="selectedDate"
                             class="ion-text-end"
@@ -134,26 +134,65 @@
                       </ion-accordion>
                     </ion-accordion-group>
                   </ion-list>
-
-                  <ion-list>
+                  
+                  <ion-list id="mealTimeAccordion">
+                    <ion-accordion-group>
+                      <ion-accordion value="start">
+                        <ion-item slot="header">
+                          <ion-label>Meal Time</ion-label>
+                          <ion-label
+                            id="selectedMealTime"
+                            class="ion-text-end"
+                          ></ion-label>
+                          <ion-note slot="end"></ion-note>
+                        </ion-item>
+                        <ion-list slot="content">
+                        <ion-radio-group id="selectMealTime" value="">
+                          <ion-item class="mealTimeSlot">
+                            <ion-radio color="light" checked="true" value="Breakfast">
+                              <ion-label>
+                              Breakfast
+                              </ion-label>
+                            </ion-radio>
+                          </ion-item>
+                        <ion-item class="mealTimeSlot">
+                          <ion-radio color="light" checked="true" value="Lunch">
+                            <ion-label>
+                              Lunch
+                            </ion-label>
+                          </ion-radio>
+                        </ion-item>
+                        <ion-item class="mealTimeSlot">
+                          <ion-radio color="light" checked="true" value="Dinner">
+                            <ion-label>
+                              Dinner
+                            </ion-label>
+                          </ion-radio>
+                        </ion-item>
+                      </ion-radio-group>
+                    </ion-list>
+                    </ion-accordion>
+                    </ion-accordion-group>
+                  </ion-list>
+                  <!-- <ion-list>
                     <ion-item>
-                      <ion-select
+                      <ion-radio
                         aria-label="meal-time"
                         placeholder="Select meal time"
                         id="mealTime"
                       >
-                        <ion-select-option value="breakfast"
-                          >breakfast</ion-select-option
+                        <ion-radio value="breakfast"
+                          >breakfast</ion-radio
                         >
-                        <ion-select-option value="lunch"
-                          >lunch</ion-select-option
+                        <ion-radio value="lunch"
+                          >lunch</ion-radio
                         >
-                        <ion-select-option value="dinner"
-                          >dinner</ion-select-option
+                        <ion-radio value="dinner"
+                          >dinner</ion-radio
                         >
-                      </ion-select>
+                      </ion-radio>
                     </ion-item>
-                  </ion-list>
+                  </ion-list> -->
                   <input id="upload" type="file" name="image" />
                   <input id="submitPhoto" type="submit" value="Submit" />
                   <div id="myProgress" hidden="true">

@@ -180,3 +180,10 @@ dateTime.addEventListener("click", function() {
   selectedDate.textContent = dateTimeFormat[0];
   dateTimeAccordion.onClick
 })
+
+let selectMealTime = document.querySelector("#selectMealTime")
+let selectedMealTime = document.querySelector("#selectedMealTime")
+selectMealTime.addEventListener("click", function(){
+  console.log(selectMealTime.value)
+  selectedMealTime.textContent = selectMealTime.value
+})
