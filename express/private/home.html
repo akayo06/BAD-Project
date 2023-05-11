@@ -18,8 +18,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
     />
-    <link rel="stylesheet" href="/index.css" />
-
+    <link rel="stylesheet" href="/home.css" />
   </head>
   <body>
     <ion-app>
@@ -106,76 +105,82 @@
               </ion-toolbar>
             </ion-header>
             <ion-content [fullscreen]="true" class="ion-padding">
-                <form
-                  onsubmit="submitFoodPic(event)"
-                  id="food-pic"
-                  method="POST"
-                  action="/food-pic"
-                  enctype="multipart/form-data"
-                >
-                  <ion-list id="dateTimeAccordion">
-                    <ion-accordion-group>
-                      <ion-accordion value="start">
-                        <ion-item slot="header">
-                          <ion-label>Meal Date</ion-label>
-                          <ion-label
-                            id="selectedDate"
-                            class="ion-text-end"
-                          ></ion-label>
-                          <ion-note slot="end"></ion-note>
-                        </ion-item>
-                        <ion-datetime
-                          slot="content"
-                          displayFormat="MMMM YY"
-                          [(ngModel)]="dateExample"
-                          size="cover"
-                          presentation="date"
-                          show-default-buttons="true"
-                        ></ion-datetime>
-                      </ion-accordion>
-                    </ion-accordion-group>
-                  </ion-list>
-                  
-                  <ion-list id="mealTimeAccordion">
-                    <ion-accordion-group>
-                      <ion-accordion value="start">
-                        <ion-item slot="header">
-                          <ion-label>Meal Time</ion-label>
-                          <ion-label
-                            id="selectedMealTime"
-                            class="ion-text-end"
-                          ></ion-label>
-                          <ion-note slot="end"></ion-note>
-                        </ion-item>
-                        <ion-list slot="content">
+              <form
+                onsubmit="submitFoodPic(event)"
+                id="food-pic"
+                method="POST"
+                action="/food-pic"
+                enctype="multipart/form-data"
+              >
+                <ion-list id="dateTimeAccordion">
+                  <ion-accordion-group>
+                    <ion-accordion value="start">
+                      <ion-item slot="header">
+                        <ion-label>Meal Date</ion-label>
+                        <ion-label
+                          id="selectedDate"
+                          class="ion-text-end"
+                        ></ion-label>
+                        <ion-note slot="end"></ion-note>
+                      </ion-item>
+                      <ion-datetime
+                        slot="content"
+                        displayFormat="MMMM YY"
+                        [(ngModel)]="dateExample"
+                        size="cover"
+                        presentation="date"
+                        show-default-buttons="true"
+                      ></ion-datetime>
+                    </ion-accordion>
+                  </ion-accordion-group>
+                </ion-list>
+
+                <ion-list id="mealTimeAccordion">
+                  <ion-accordion-group>
+                    <ion-accordion value="start">
+                      <ion-item slot="header">
+                        <ion-label>Meal Time</ion-label>
+                        <ion-label
+                          id="selectedMealTime"
+                          class="ion-text-end"
+                        ></ion-label>
+                        <ion-note slot="end"></ion-note>
+                      </ion-item>
+                      <ion-list slot="content">
                         <ion-radio-group id="selectMealTime" value="">
                           <ion-item class="mealTimeSlot">
-                            <ion-radio color="light" checked="true" value="Breakfast">
-                              <ion-label>
-                              Breakfast
-                              </ion-label>
+                            <ion-radio
+                              color="light"
+                              checked="true"
+                              value="Breakfast"
+                            >
+                              <ion-label> Breakfast </ion-label>
                             </ion-radio>
                           </ion-item>
-                        <ion-item class="mealTimeSlot">
-                          <ion-radio color="light" checked="true" value="Lunch">
-                            <ion-label>
-                              Lunch
-                            </ion-label>
-                          </ion-radio>
-                        </ion-item>
-                        <ion-item class="mealTimeSlot">
-                          <ion-radio color="light" checked="true" value="Dinner">
-                            <ion-label>
-                              Dinner
-                            </ion-label>
-                          </ion-radio>
-                        </ion-item>
-                      </ion-radio-group>
-                    </ion-list>
+                          <ion-item class="mealTimeSlot">
+                            <ion-radio
+                              color="light"
+                              checked="true"
+                              value="Lunch"
+                            >
+                              <ion-label> Lunch </ion-label>
+                            </ion-radio>
+                          </ion-item>
+                          <ion-item class="mealTimeSlot">
+                            <ion-radio
+                              color="light"
+                              checked="true"
+                              value="Dinner"
+                            >
+                              <ion-label> Dinner </ion-label>
+                            </ion-radio>
+                          </ion-item>
+                        </ion-radio-group>
+                      </ion-list>
                     </ion-accordion>
-                    </ion-accordion-group>
-                  </ion-list>
-                  <!-- <ion-list>
+                  </ion-accordion-group>
+                </ion-list>
+                <!-- <ion-list>
                     <ion-item>
                       <ion-radio
                         aria-label="meal-time"
@@ -194,78 +199,77 @@
                       </ion-radio>
                     </ion-item>
                   </ion-list> -->
-                  <input id="upload" type="file" name="image" />
-                  <input id="submitPhoto" type="submit" value="Submit" />
-                  <div id="myProgress" hidden="true">
-                    <div id="myBar">10%</div>
-                  </div>
-                  <img id="result-poc" alt="result pic" src="" hidden="true" />
-                  <ion-list class="food-items"></ion-list>
-                  <div class="ion-text-end">
-                    <ion-button
-                      id="calculateCalories"
-                      class="confirm-button hidden"
-                      color="warning"
-                      >Calculate Calories</ion-button
-                    >
-                  </div>
-                  <div class="total_calculated_result"></div>
-                  <template>
-                    <ion-grid id="calculatedNutritionValue">
-                      <h2 class="ion-text-center" id="calculatedResultTitle">
-                        Result
-                      </h2>
-                      <ion-row class="nutritionTable">
-                        <ion-col class="ion-text-start">Energy</ion-col>
-                        <ion-col class="ion-text-end" id="energy"></ion-col>
-                      </ion-row>
-                      <ion-row class="nutritionTable">
-                        <ion-col class="ion-text-start">Protein</ion-col>
-                        <ion-col class="ion-text-end" id="protein"></ion-col>
-                      </ion-row>
-                      <ion-row class="nutritionTable">
-                        <ion-col class="ion-text-start">Total Fat</ion-col>
-                        <ion-col class="ion-text-end" id="total_fat"></ion-col>
-                      </ion-row>
-                      <ion-row class="nutritionTable">
-                        <ion-col class="ion-text-start">Saturated Fat</ion-col>
-                        <ion-col
-                          class="ion-text-end"
-                          id="saturated_fat"
-                        ></ion-col>
-                      </ion-row>
-                      <ion-row class="nutritionTable">
-                        <ion-col class="ion-text-start">Trans Fat</ion-col>
-                        <ion-col class="ion-text-end" id="trans_fat"></ion-col>
-                      </ion-row>
-                      <ion-row class="nutritionTable">
-                        <ion-col class="ion-text-start">Carbohydrates</ion-col>
-                        <ion-col
-                          class="ion-text-end"
-                          id="carbohydrates"
-                        ></ion-col>
-                      </ion-row>
-                      <ion-row class="nutritionTable">
-                        <ion-col class="ion-text-start">Sugar</ion-col>
-                        <ion-col class="ion-text-end" id="sugar"></ion-col>
-                      </ion-row>
-                      <ion-row class="nutritionTable">
-                        <ion-col class="ion-text-start">Sodium</ion-col>
-                        <ion-col class="ion-text-end" id="sodium"></ion-col>
-                      </ion-row>
-                    </ion-grid>
-                  </template>
-                  <ion-list class="calories-result"></ion-list>
-                </form>
+                <input id="upload" type="file" name="image" />
+                <input id="submitPhoto" type="submit" value="Submit" />
+                <div id="myProgress" hidden="true">
+                  <div id="myBar">10%</div>
+                </div>
+                <img id="result-poc" alt="result pic" src="" hidden="true" />
+                <ion-list class="food-items"></ion-list>
+                <div class="ion-text-end">
+                  <ion-button
+                    id="calculateCalories"
+                    class="confirm-button hidden"
+                    color="warning"
+                    >Calculate Calories</ion-button
+                  >
+                </div>
+                <div class="total_calculated_result"></div>
+                <template>
+                  <ion-grid id="calculatedNutritionValue">
+                    <h2 class="ion-text-center" id="calculatedResultTitle">
+                      Result
+                    </h2>
+                    <ion-row class="nutritionTable">
+                      <ion-col class="ion-text-start">Energy</ion-col>
+                      <ion-col class="ion-text-end" id="energy"></ion-col>
+                    </ion-row>
+                    <ion-row class="nutritionTable">
+                      <ion-col class="ion-text-start">Protein</ion-col>
+                      <ion-col class="ion-text-end" id="protein"></ion-col>
+                    </ion-row>
+                    <ion-row class="nutritionTable">
+                      <ion-col class="ion-text-start">Total Fat</ion-col>
+                      <ion-col class="ion-text-end" id="total_fat"></ion-col>
+                    </ion-row>
+                    <ion-row class="nutritionTable">
+                      <ion-col class="ion-text-start">Saturated Fat</ion-col>
+                      <ion-col
+                        class="ion-text-end"
+                        id="saturated_fat"
+                      ></ion-col>
+                    </ion-row>
+                    <ion-row class="nutritionTable">
+                      <ion-col class="ion-text-start">Trans Fat</ion-col>
+                      <ion-col class="ion-text-end" id="trans_fat"></ion-col>
+                    </ion-row>
+                    <ion-row class="nutritionTable">
+                      <ion-col class="ion-text-start">Carbohydrates</ion-col>
+                      <ion-col
+                        class="ion-text-end"
+                        id="carbohydrates"
+                      ></ion-col>
+                    </ion-row>
+                    <ion-row class="nutritionTable">
+                      <ion-col class="ion-text-start">Sugar</ion-col>
+                      <ion-col class="ion-text-end" id="sugar"></ion-col>
+                    </ion-row>
+                    <ion-row class="nutritionTable">
+                      <ion-col class="ion-text-start">Sodium</ion-col>
+                      <ion-col class="ion-text-end" id="sodium"></ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </template>
+                <ion-list class="calories-result"></ion-list>
+              </form>
 
-                <!-- <ion-alert
+              <!-- <ion-alert
                   trigger="submitPhoto"
                   header="Alert"
                   subHeader="Important message"
                   message="Please select photo!"
                   [buttons]="alertButtons"
                 ></ion-alert> -->
-              </div>
             </ion-content>
           </div>
         </ion-tab>
@@ -343,6 +347,6 @@
       </ion-tabs>
     </ion-app>
 
-    <script src="/index.js"></script>
+    <script src="/home.js"></script>
   </body>
 </html>

@@ -17,17 +17,41 @@ loginForm.addEventListener("submit", async function (event) {
   console.log(formObject);
   const result = await res.json(); // { success: true }
   console.log(result);
-  presentAlert(result.message);
-  // if (result.status === true) {
-  //   window.location = `/index.html`;
-  // }
+
+  if (result.status === true) {
+    presentAlert(result.message);
+  } else {
+    presentAlertFail(result.message);
+  }
 });
+
+async function presentAlertFail(message) {
+  const alert = document.createElement("ion-alert");
+  alert.header = "Message";
+  alert.message = message;
+
+  alert.buttons = [
+    {
+      text: "Return",
+    },
+  ];
+
+  document.body.appendChild(alert);
+  await alert.present();
+}
 
 async function presentAlert(message) {
   const alert = document.createElement("ion-alert");
   alert.header = "Message";
   alert.message = message;
-  alert.buttons = ["OK"];
+  alert.buttons = [
+    {
+      text: "OK",
+      handler: () => {
+        window.location = `/home.html`;
+      },
+    },
+  ];
 
   document.body.appendChild(alert);
   await alert.present();
