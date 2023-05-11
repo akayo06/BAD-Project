@@ -1,0 +1,59 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>jQuery UI Dialog - Default functionality</title>
+    <style>
+      img {
+        width: 300px;
+        height: 300px;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+    />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
+    />
+  </head>
+  <body>
+    <div id="dialog" title="Preview">
+      <img
+        src="https://www.w3schools.com/tags/img_girl.jpg"
+        alt="Girl in a jacket"
+        width="500"
+        height="600"
+      />
+      <p>Is this the picture you want to scan?</p>
+      <div class="ion-text-center">
+        <ion-button size="default" color="warning" id="cancel-btn"
+          >Cancel</ion-button
+        >
+        <ion-button size="default" color="warning" id="confirm-btn"
+          >Confirm</ion-button
+        >
+      </div>
+    </div>
+    <script>
+      $(function () {
+        $("#dialog").dialog();
+      });
+      let cancel = document.getElementById("cancel-btn");
+
+      cancel.addEventListener("click", () => {});
+    </script>
+  </body>
+</html>

@@ -164,25 +164,26 @@ function move() {
       } else {
         width++;
         elem.style.width = width + "%";
-        elem.innerHTML = width + "%";
+        //open.spotify.com/playlist/14TaTmR3N9PGEmdbiRKoJS
+        https: elem.innerHTML = width + "%";
       }
     }
   });
 }
 
-let dateTime = document.querySelector("ion-dateTime")
-let selectedDate = document.querySelector("#selectedDate")
-let dateTimeAccordion = document.querySelector("#dateTimeAccordion")
-dateTime.addEventListener("click", function() {
-  let dateTimeFormat = dateTime.value.toString().split("T")
-  console.log(dateTimeFormat)
+let dateTime = document.querySelector("ion-dateTime");
+let selectedDate = document.querySelector("#selectedDate");
+let dateTimeAccordion = document.querySelector("#dateTimeAccordion");
+dateTime.addEventListener("click", function () {
+  let dateTimeFormat = dateTime.value.toString().split("T");
+  console.log(dateTimeFormat);
   selectedDate.textContent = dateTimeFormat[0];
-  dateTimeAccordion.onClick
-})
+  dateTimeAccordion.onClick;
+});
 
-let selectMealTime = document.querySelector("#selectMealTime")
-let selectedMealTime = document.querySelector("#selectedMealTime")
-selectMealTime.addEventListener("click", function(){
-  console.log(selectMealTime.value)
-  selectedMealTime.textContent = selectMealTime.value
-})
+let selectMealTime = document.querySelector("#selectMealTime");
+let selectedMealTime = document.querySelector("#selectedMealTime");
+selectMealTime.addEventListener("click", function () {
+  console.log(selectMealTime.value);
+  selectedMealTime.textContent = selectMealTime.value;
+});
