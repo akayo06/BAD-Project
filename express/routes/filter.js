@@ -25,21 +25,17 @@ const fakeData = [
   { confident: 0.9081364274024963, label: "Fresh Corn Cup" },
 ];
 
-let foodItemQuantityArray = [];
+let foodItemQuantity = {};
 
 for (let food of fakeData) {
-  let itemFound = false;
-  for (let foodItem of foodItemQuantityArray) {
-    if (food.label == foodItem[0]) {
-      foodItem[1]++;
-      itemFound = true;
-    }
+  if (foodItemQuantity[food.label] != undefined) {
+    foodItemQuantity[food.label]++;
+  } else {
+    foodItemQuantity[food.label] = 1;
   }
-  if (!itemFound) {
-    foodItemQuantityArray.push([food.label, 1]);
-  }
+  console.log(foodItemQuantity);
 }
-console.log(foodItemQuantityArray);
+console.log(foodItemQuantity);
 
 /*
 let outputMap = new Map();
