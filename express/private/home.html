@@ -115,7 +115,7 @@
                 <ion-list id="dateTimeAccordion">
                   <ion-accordion-group>
                     <ion-accordion value="start">
-                      <ion-item slot="header">
+                      <ion-item slot="header" id="dateButton">
                         <ion-label>Meal Date</ion-label>
                         <ion-label
                           id="selectedDate"
@@ -126,10 +126,8 @@
                       <ion-datetime
                         slot="content"
                         displayFormat="MMMM YY"
-                        [(ngModel)]="dateExample"
                         size="cover"
                         presentation="date"
-                        show-default-buttons="true"
                       ></ion-datetime>
                     </ion-accordion>
                   </ion-accordion-group>
@@ -150,8 +148,8 @@
                         <ion-radio-group id="selectMealTime" value="">
                           <ion-item class="mealTimeSlot">
                             <ion-radio
-                              color="light"
-                              checked="true"
+                              class="mealTimeOption"
+                              checked="false"
                               value="Breakfast"
                             >
                               <ion-label> Breakfast </ion-label>
@@ -159,8 +157,8 @@
                           </ion-item>
                           <ion-item class="mealTimeSlot">
                             <ion-radio
-                              color="light"
-                              checked="true"
+                              class="mealTimeOption"
+                              checked="false"
                               value="Lunch"
                             >
                               <ion-label> Lunch </ion-label>
@@ -168,8 +166,8 @@
                           </ion-item>
                           <ion-item class="mealTimeSlot">
                             <ion-radio
-                              color="light"
-                              checked="true"
+                              class="mealTimeOption"
+                              checked="false"
                               value="Dinner"
                             >
                               <ion-label> Dinner </ion-label>
@@ -208,6 +206,7 @@
                 <ion-list class="food-items"></ion-list>
                 <div class="ion-text-end">
                   <ion-button
+                    onclick="confirmAlert()"
                     id="calculateCalories"
                     class="confirm-button hidden"
                     color="warning"

@@ -19,7 +19,7 @@ loginForm.addEventListener("submit", async function (event) {
   console.log(result);
 
   if (result.status === true) {
-    presentAlert(result.message);
+    presentAlert(result.message, result.id);
   } else {
     presentAlertFail(result.message);
   }
@@ -40,7 +40,7 @@ async function presentAlertFail(message) {
   await alert.present();
 }
 
-async function presentAlert(message) {
+async function presentAlert(message, id) {
   const alert = document.createElement("ion-alert");
   alert.header = "Message";
   alert.message = message;
@@ -48,7 +48,7 @@ async function presentAlert(message) {
     {
       text: "OK",
       handler: () => {
-        window.location = `/home.html`;
+        window.location = `/home.html?id=${id}`;
       },
     },
   ];

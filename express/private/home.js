@@ -171,19 +171,60 @@ function move() {
   });
 }
 
-let dateTime = document.querySelector("ion-dateTime");
+let dateTime = document.querySelector("ion-datetime");
 let selectedDate = document.querySelector("#selectedDate");
-let dateTimeAccordion = document.querySelector("#dateTimeAccordion");
+// let dateTimeAccordion = document.querySelector("#dateTimeAccordion");
+
 dateTime.addEventListener("click", function () {
-  let dateTimeFormat = dateTime.value.toString().split("T");
+  console.log(dateTime.value);
+  let dateTimeFormat = dateTime.value.split("T");
   console.log(dateTimeFormat);
   selectedDate.textContent = dateTimeFormat[0];
-  dateTimeAccordion.onClick;
 });
 
-let selectMealTime = document.querySelector("#selectMealTime");
-let selectedMealTime = document.querySelector("#selectedMealTime");
+// let selectMealTime = document.querySelector("#selectMealTime");
+// let selectedMealTime = document.querySelector("#selectedMealTime");
+let mealOptions = document.querySelectorAll(".mealTimeOption");
+
+mealOptions.forEach((option) => {
+  option.addEventListener("click", function () {
+    console.log(option.value);
+    selectedMealTime.textContent = option.value;
+  });
+});
+
+/*
 selectMealTime.addEventListener("click", function () {
   console.log(selectMealTime.value);
   selectedMealTime.textContent = selectMealTime.value;
 });
+*/
+// dateTimeAccordion.addEventListener("ionChange", function () {
+//   console.log("changed");
+//   let calendar = document.querySelector("ion-datetime");
+//   console.log(calendar);
+//   calendar.addEventListener("ionChange", function () {
+//     console.log(dateTime.value);
+//   });
+// });
+
+//alert button setup
+async function confirmAlert() {
+  const alert = document.createElement("ion-alert");
+  alert.header = "Confirm";
+  alert.subHeader = "Important message";
+  alert.message = "Do you confirm to calculate these items";
+  alert.buttons = [
+    {
+      text: "No",
+      cssClass: "alert-button-cancel",
+    },
+    {
+      text: "Yes",
+      cssClass: "alert-button-confirm",
+    },
+  ];
+
+  document.body.appendChild(alert);
+  await alert.present();
+}
