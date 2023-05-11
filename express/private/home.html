@@ -45,8 +45,22 @@
               </ion-toolbar>
             </ion-header>
             <ion-content class="ion-padding">
-              <!-- <div class="home-content infinite-scroll-content"></div> -->
-              <!-- <video id="video" width="720" height="560" autoplay muted></video> -->
+              <ion-fab
+                slot="fixed"
+                vertical="top"
+                horizontal="end"
+                [edge]="true"
+              >
+                <ion-fab-button>
+                  <ion-icon name="chevron-down-circle"></ion-icon>
+                </ion-fab-button>
+                <ion-fab-list side="bottom">
+                  <ion-fab-button>
+                    <ion-icon name="exit-outline" id="logout"></ion-icon>
+                  </ion-fab-button>
+                </ion-fab-list>
+              </ion-fab>
+
               <ion-card>
                 <img alt="Silhouette of mountains" src="/img/home1.jpg" />
                 <ion-card-header>
@@ -206,7 +220,6 @@
                 <ion-list class="food-items"></ion-list>
                 <div class="ion-text-end">
                   <ion-button
-                    onclick="confirmAlert()"
                     id="calculateCalories"
                     class="confirm-button hidden"
                     color="warning"
@@ -345,7 +358,7 @@
         </ion-tab-bar>
       </ion-tabs>
     </ion-app>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/home.js"></script>
   </body>
 </html>

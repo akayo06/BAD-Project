@@ -12,7 +12,7 @@
   width: 25em;
   background: #fff;
   position: absolute;
-  top: 50%;
+  top: 38.5%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-transform: uppercase;
@@ -24,7 +24,7 @@
   width: 100%;
 }
 .username {
-  background-color: #4daf7c;
+  background-color: rgb(243, 50, 50);
 }
 .username::after {
   content: "";
@@ -39,7 +39,7 @@
   margin-left: -0.496em;
 }
 .password {
-  background-color: #404241;
+  background-color: rgb(48, 8, 0);
 }
 .password::after {
   content: "";
@@ -53,13 +53,18 @@
   left: 50%;
   margin-left: -0.496em;
 }
+.top {
+  background-color: rgb(162, 117, 48);
+}
+.bottom {
+  background-color: rgb(162, 117, 48);
+}
 .login {
-  background-color: #e9c85d;
-  display: flex;
+  background-color: rgb(128, 207, 66);
+  display: table;
   justify-content: center;
   align-items: center;
   height: 200px;
-  border: 3px solid green;
 }
 .login button {
   display: table-cell;

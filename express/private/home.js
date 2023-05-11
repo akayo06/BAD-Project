@@ -68,14 +68,15 @@ async function submitFoodPic(event) {
 
   let calculateCalories = document.querySelector("#calculateCalories");
   let selectedAllFood = document.querySelectorAll(".selectedFood");
-  calculateCalories.addEventListener("click", function () {
+  calculateCalories.addEventListener("click", async function () {
     let foodItems = [];
-    for (selectedFood of selectedAllFood) {
+    for (let selectedFood of selectedAllFood) {
       console.log(`select food`, selectedFood);
       if (selectedFood.style.display != "none") {
         let splitArray = selectedFood.getAttribute("aria-label").split(",");
         if (splitArray.length == 1) {
-          console.log("Have error");
+          await confirmAlert(splitArray[0]);
+          console.log(splitArray[0]);
           return;
         }
         foodItems.push(splitArray[0]);
@@ -109,6 +110,7 @@ async function submitFoodPic(event) {
     }
     console.log(nutrition);
     let template = document.querySelector("template");
+
     let total_energy = 0;
     let total_protein = 0;
     let total_saturated_fat = 0;
@@ -128,6 +130,7 @@ async function submitFoodPic(event) {
       total_trans_fat += parseFloat(food.trans_fat);
       total_carbohydrate += parseFloat(food.carbohydrate);
     }
+    document.querySelector(".total_calculated_result").innerHTML = "";
     let node = template.content
       .querySelector("#calculatedNutritionValue")
       .cloneNode(true);
@@ -183,7 +186,7 @@ dateTime.addEventListener("click", function () {
 });
 
 // let selectMealTime = document.querySelector("#selectMealTime");
-// let selectedMealTime = document.querySelector("#selectedMealTime");
+let selectedMealTime = document.querySelector("#selectedMealTime");
 let mealOptions = document.querySelectorAll(".mealTimeOption");
 
 mealOptions.forEach((option) => {
@@ -209,20 +212,21 @@ selectMealTime.addEventListener("click", function () {
 // });
 
 //alert button setup
-async function confirmAlert() {
+
+async function confirmAlert(missingCategory) {
   const alert = document.createElement("ion-alert");
-  alert.header = "Confirm";
-  alert.subHeader = "Important message";
-  alert.message = "Do you confirm to calculate these items";
+  alert.header = "Error";
+  //alert.subHeader = "Important message";
+  alert.message = `Missing ${missingCategory} choice input`;
   alert.buttons = [
     {
-      text: "No",
+      text: "OK",
       cssClass: "alert-button-cancel",
     },
-    {
-      text: "Yes",
-      cssClass: "alert-button-confirm",
-    },
+    // {
+    //   text: "Yes",
+    //   cssClass: "alert-button-confirm",
+    // },
   ];
 
   document.body.appendChild(alert);
