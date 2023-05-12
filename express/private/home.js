@@ -176,13 +176,15 @@ function move() {
 
 let dateTime = document.querySelector("ion-datetime");
 let selectedDate = document.querySelector("#selectedDate");
-// let dateTimeAccordion = document.querySelector("#dateTimeAccordion");
+let dateTimeAccordion = document.querySelector("#dateTimeAccordion");
+let mealTimeAccordion = document.querySelector("#mealTimeAccordion");
 
 dateTime.addEventListener("click", function () {
   console.log(dateTime.value);
   let dateTimeFormat = dateTime.value.split("T");
   console.log(dateTimeFormat);
   selectedDate.textContent = dateTimeFormat[0];
+  dateTimeAccordion.value = undefined;
 });
 
 // let selectMealTime = document.querySelector("#selectMealTime");
@@ -193,6 +195,7 @@ mealOptions.forEach((option) => {
   option.addEventListener("click", function () {
     console.log(option.value);
     selectedMealTime.textContent = option.value;
+    mealTimeAccordion.value = undefined;
   });
 });
 

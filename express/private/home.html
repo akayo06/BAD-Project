@@ -126,9 +126,9 @@
                 action="/food-pic"
                 enctype="multipart/form-data"
               >
-                <ion-list id="dateTimeAccordion">
-                  <ion-accordion-group>
-                    <ion-accordion value="start">
+                <ion-list>
+                  <ion-accordion-group id="dateTimeAccordion">
+                    <ion-accordion value="dateTime">
                       <ion-item slot="header" id="dateButton">
                         <ion-label>Meal Date</ion-label>
                         <ion-label
@@ -147,9 +147,9 @@
                   </ion-accordion-group>
                 </ion-list>
 
-                <ion-list id="mealTimeAccordion">
-                  <ion-accordion-group>
-                    <ion-accordion value="start">
+                <ion-list>
+                  <ion-accordion-group id="mealTimeAccordion">
+                    <ion-accordion value="mealTime">
                       <ion-item slot="header">
                         <ion-label>Meal Time</ion-label>
                         <ion-label
@@ -218,7 +218,7 @@
                 </div>
                 <img id="result-poc" alt="result pic" src="" hidden="true" />
                 <ion-list class="food-items"></ion-list>
-                <div class="ion-text-end">
+                <div id="calBtnPlace" class="ion-text-end">
                   <ion-button
                     id="calculateCalories"
                     class="confirm-button hidden"
