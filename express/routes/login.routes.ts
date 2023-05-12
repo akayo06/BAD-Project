@@ -21,7 +21,6 @@ loginRoute.post(`/login`, async (req, res) => {
     email: req.body.email,
     id: user_profile[0].id,
   };
-  console.log("123");
   req.session.save();
 
   return res.json({
@@ -30,3 +29,24 @@ loginRoute.post(`/login`, async (req, res) => {
     id: user_profile[0].id,
   });
 });
+
+
+loginRoute.get("/role", (req, res) => {
+  res.json({
+    user: req.session.user,
+  });
+});
+
+loginRoute.post("/logout", (req, res) => {
+  if (!req.session.user) {
+    res.json({ role: "guest" });
+    return;
+  }
+  req.session.destroy((err) => {
+    if (err) {
+      res.json({ role: "user" });
+    } else {
+      res.json({ role: "guest" });
+    }
+  });
+}); 

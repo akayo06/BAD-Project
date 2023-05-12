@@ -40,7 +40,7 @@ usersRoute.post("/food-pic", (req, res) => {
             "total_fat",
             "saturated_fat",
             "trans_fat",
-            "carbonhydrate",
+            "carbohydrate",
             "sugars",
             "sodium"
           )
@@ -73,3 +73,4 @@ async function requestToPython(in_filename: string) {
     items: json,
   };
 }
+

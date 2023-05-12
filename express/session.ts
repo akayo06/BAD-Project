@@ -1,9 +1,16 @@
-import expressSession from "express-session";
+import session from "express-session";
+import { GrantSession } from "grant";
 
-export let sessionMiddleware = expressSession({
-  secret: "Tecky Academy teaches typescript",
-  resave: true,
-  saveUninitialized: true,
+export let sessionMiddleware = session({
+  secret:
+    Math.random().toString(36).slice(2) +
+    Math.random().toString(36).slice(2) +
+    Math.random().toString(36).slice(2),
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60, // 1hr
+  },
 });
 
 declare module "express-session" {
@@ -12,5 +19,6 @@ declare module "express-session" {
       email: string;
       id: number;
     };
+    grant?: GrantSession;
   }
 }

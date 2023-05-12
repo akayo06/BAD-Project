@@ -12,7 +12,7 @@ export function hasLogin(req: Request, res: Response, next: NextFunction) {
     return;
   } else {
     res.status(401);
-    res.json({ error: "This API is only for authenticated users" });
+    res.json({ error: "This API is only for authenticated users - hasLogin" });
     return;
   }
 }
@@ -20,7 +20,7 @@ export function hasLogin(req: Request, res: Response, next: NextFunction) {
 export function getSessionUser(req: Request) {
   let user = req.session.user;
   if (user) return user;
-  throw new HttpError(401, "This API is only for authenticated users");
+  throw new HttpError(401, "This API is only for authenticated users - GetSessionUser");
 }
 export class HttpError extends Error {
   constructor(public statusCode: number, message: string) {

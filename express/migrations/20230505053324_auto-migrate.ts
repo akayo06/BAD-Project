@@ -4,9 +4,10 @@ export async function up(knex: Knex): Promise<void> {
   if (!(await knex.schema.hasTable("user"))) {
     await knex.schema.createTable("user", (table) => {
       table.increments("id");
-      table.string("username", 32);
-      table.string("email", 60);
-      table.string("password", 30);
+      table.string("nickname", 32);
+      table.string("email", 255);
+      table.string("password", 255);
+      table.boolean("is_male");
       table.boolean("is_admin");
       table.timestamps(false, true);
     });
@@ -22,8 +23,8 @@ export async function up(knex: Knex): Promise<void> {
       table.decimal("total_fat");
       table.decimal("saturated_fat");
       table.decimal("trans_fat");
-      table.decimal("carbonhydrate");
-      table.decimal("sugars");
+      table.decimal("carbohydrate");
+      table.decimal("sugar");
       table.decimal("sodium");
       table.timestamps(false, true);
     });
@@ -73,7 +74,7 @@ export async function up(knex: Knex): Promise<void> {
       table.decimal("total_fat");
       table.decimal("saturated_fat");
       table.decimal("trans_fat");
-      table.decimal("carbonhydrate");
+      table.decimal("carbohydrate");
       table.decimal("sugars");
       table.decimal("sodium");
       table.timestamps(false, true);

@@ -6,6 +6,7 @@ import { usersRoute } from "./routes/user.routes";
 import { loginRoute } from "./routes/login.routes";
 import Knex from "knex";
 import { hasLogin } from "./guards";
+import { signUpRoutes } from "./routes/signup.routes";
 
 const knexConfig = require("./knexfile");
 export const knex = Knex(knexConfig[process.env.NODE_ENV || "development"]);
@@ -18,6 +19,7 @@ app.use(express.json());
 
 app.use(usersRoute);
 app.use(loginRoute);
+app.use(signUpRoutes);
 app.use(express.static("public"));
 app.use("/uploads", express.static("uploads"));
 

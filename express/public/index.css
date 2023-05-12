@@ -26,6 +26,7 @@
 .username {
   background-color: rgb(243, 50, 50);
 }
+
 .username::after {
   content: "";
   width: 0px;
@@ -59,6 +60,14 @@
 .bottom {
   background-color: rgb(162, 117, 48);
 }
+.login, .confirmPassword {
+  background-color: rgb(128, 207, 66);
+  display: table;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
 .login {
   background-color: rgb(128, 207, 66);
   display: table;
@@ -66,14 +75,16 @@
   align-items: center;
   height: 200px;
 }
-.login button {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-  font-size: 3em;
-  cursor: pointer;
+
+.signUp {
+  background-color: rgb(255, 243, 12);
+  display: table;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
 }
-input {
+
+input, #signUpBtn {
   height: 1.25em;
   width: 8.125em;
   font-size: 2em;
