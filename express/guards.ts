@@ -22,9 +22,10 @@ export function getSessionUser(req: Request) {
   if (user) return user;
   throw new HttpError(401, "This API is only for authenticated users - GetSessionUser");
 }
-export class HttpError extends Error {
-  constructor(public statusCode: number, message: string) {
-    super(message);
-  }
-}
+
+// export class HttpError extends Error {
+//   constructor(public statusCode: number, message: string) {
+//     super(message);
+//   }
+// }
 
