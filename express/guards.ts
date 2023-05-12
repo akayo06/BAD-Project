@@ -20,11 +20,13 @@ export function hasLogin(req: Request, res: Response, next: NextFunction) {
 export function getSessionUser(req: Request) {
   let user = req.session.user;
   if (user) return user;
-  throw new HttpError(401, "This API is only for authenticated users - GetSessionUser");
+  throw new HttpError(
+    401,
+    "This API is only for authenticated users - GetSessionUser"
+  );
 }
-export class HttpError extends Error {
-  constructor(public statusCode: number, message: string) {
-    super(message);
-  }
-}
-
+// export class HttpError extends Error {
+//   constructor(public statusCode: number, message: string) {
+//     super(message);
+//   }
+// }
