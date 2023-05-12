@@ -20,11 +20,9 @@ signUpForm.addEventListener("submit", async function (event) {
   console.log(result);
 
   if (result.status === true) {
-    // await presentAlert(result.message, result.id);
-    console.log("success")
+    await presentAlert(result.message, result.id);
   } else {
-    // await presentAlertFail(result.message);
-    console.log("fail")
+    await presentAlertFail(result.message);
   }
 });
 
@@ -51,7 +49,7 @@ async function presentAlert(message, id) {
     {
       text: "OK",
       handler: () => {
-        window.location = `/home.html?id=${id}`;
+        window.location = `/app/home.html?id=${id}`;
       },
     },
   ];

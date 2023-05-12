@@ -5,13 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
+    />
     <link rel="stylesheet" href="/index.css" />
   </head>
   <body>
     <ion-app>
+      <ion-header class="ion-no-border">
+        <ion-toolbar>
+          <ion-title>Sign Up</ion-title>
+          <ion-subtitle>Welcome to McFitness</ion-subtitle>
+        </ion-toolbar>
+      </ion-header>
       <form id="signUpForm">
-        <h2>Sign Up</h2>
-        <h3>Welcome to McFitness</h3>
         <hr />
         <div class="form">
           <div class="top"></div>

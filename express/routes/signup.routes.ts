@@ -8,7 +8,7 @@ export let signUpRoutes = express.Router();
 
 signUpRoutes.post(`/signUp`, async (req, res) => {
   let user_profile = await knex("user")
-    .select("email")
+    .select("email", "id")
     .where("email", req.body.email);
 
   if (user_profile.length > 0) {
@@ -26,27 +26,25 @@ signUpRoutes.post(`/signUp`, async (req, res) => {
     .insert(
       [
         {
-          username: "",
+          nickname: "",
           email: req.body.email,
           is_admin: false,
+          is_male: true,
           password: password_hash
         },
-      ]).returning('id')
-
-
+      ]).returning('id');
 
   req.session.user = {
     email: req.body.email,
     id: newUser[0].id,
   };
 
-
   req.session.save();
 
   return res.json({
     status: true,
-    message: "Login success",
-    id: user_profile[0].id,
+    message: "Sign-up success",
+    id: newUser[0].id,
   })
 })
 
