@@ -6,6 +6,7 @@ import { usersRoute } from "./routes/user.routes";
 import { loginRoute } from "./routes/login.routes";
 import Knex from "knex";
 import { hasLogin } from "./guards";
+import { HttpError } from "./error";
 
 const knexConfig = require("./knexfile");
 export const knex = Knex(knexConfig[process.env.NODE_ENV || "development"]);
@@ -21,14 +22,16 @@ app.use(loginRoute);
 app.use(express.static("public"));
 app.use("/uploads", express.static("uploads"));
 
-app.use(hasLogin, express.static("private"));
-app.use((error: any, req: Request, res: Response, next: NextFunction) => {
+app.use("/app", hasLogin, express.static("private"));
+
+app.use((error: HttpError, req: Request, res: Response, next: NextFunction) => {
   console.error(error);
-  if ("statusCode" in error) {
-    res.status(error.statusCode);
-  } else {
-    res.status(500);
-  }
+  res.status(error.statusCode || 500);
+  // if ("statusCode" in error) {
+  //   res.status(error.statusCode);
+  // } else {
+  //   res.status(500);
+  // }
   let message = String(error);
   message = message.replace(/\w+: /, "");
   res.json({

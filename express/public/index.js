@@ -48,7 +48,7 @@ async function presentAlert(message, id) {
     {
       text: "OK",
       handler: () => {
-        window.location = `/home.html?id=${id}`;
+        window.location = `/app/home.html?id=${id}`;
       },
     },
   ];
