@@ -50,7 +50,7 @@ usersRoute.post(
               "total_fat",
               "saturated_fat",
               "trans_fat",
-              "carbonhydrate",
+              "carbohydrate",
               "sugars",
               "sodium"
             )

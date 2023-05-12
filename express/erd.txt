@@ -18,7 +18,7 @@ protein numeric
 total_fat numeric
 saturated_fat numeric
 trans_fat numeric
-carbonhydrate numeric
+carbohydrate numeric
 sugars numeric
 sodium numeric
 
@@ -57,7 +57,7 @@ protein numeric
 total_fat numeric
 saturated_fat numeric
 trans_fat numeric
-carbonhydrate numeric
+carbohydrate numeric
 sugars numeric
 sodium numeric
 created_at datetime

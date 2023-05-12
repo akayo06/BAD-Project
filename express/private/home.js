@@ -136,7 +136,7 @@ async function submitFoodPic(event) {
               sugars: suggestion.sugars,
               total_fat: suggestion.total_fat,
               trans_fat: suggestion.trans_fat,
-              carbohydrate: suggestion.carbonhydrate,
+              carbohydrate: suggestion.carbohydrate,
             });
           }
         }

@@ -22,7 +22,7 @@ export async function up(knex: Knex): Promise<void> {
       table.decimal("total_fat");
       table.decimal("saturated_fat");
       table.decimal("trans_fat");
-      table.decimal("carbonhydrate");
+      table.decimal("carbohydrate");
       table.decimal("sugars");
       table.decimal("sodium");
       table.timestamps(false, true);
@@ -73,7 +73,7 @@ export async function up(knex: Knex): Promise<void> {
       table.decimal("total_fat");
       table.decimal("saturated_fat");
       table.decimal("trans_fat");
-      table.decimal("carbonhydrate");
+      table.decimal("carbohydrate");
       table.decimal("sugars");
       table.decimal("sodium");
       table.timestamps(false, true);

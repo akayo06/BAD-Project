@@ -18,7 +18,7 @@ protein integer
 total_fat integer
 saturated_fat integer
 trans_fat integer
-carbonhydrate integer
+carbohydrate integer
 sugars integer
 sodium integer
 
@@ -57,7 +57,7 @@ protein integer
 total_fat integer
 saturated_fat integer
 trans_fat integer
-carbonhydrate integer
+carbohydrate integer
 sugars integer
 sodium integer
 created_at datetime
