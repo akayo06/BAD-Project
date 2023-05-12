@@ -43,7 +43,7 @@ async def predict_task(task: Task):
                     "confident": float(result.boxes.conf[i]),
                     "label": result.names[int(result.boxes.cls[i])]
                 })
-        return boxes
+        return {'boxes': boxes}
     except Exception as e:
         print(e)
         raise HTTPException(status_code=500, detail=str(e))

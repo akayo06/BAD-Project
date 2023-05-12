@@ -14,17 +14,49 @@ const dietNav = document.querySelector("#diet-nav");
 const dietPage = document.querySelector("#diet-page");
 dietNav.root = dietPage;
 
+picInput.addEventListener("change", () => {
+  submitPhoto.disabled = false;
+  submitFoodPic();
+});
+
 async function submitFoodPic(event) {
   console.log("event.preventDefault()");
-  event.preventDefault();
-  let form = event.target;
+  event?.preventDefault();
+  let form = foodPicForm;
+  let formData = new FormData(form);
+  // formData.append("meal-time", selectedMealTime.textContent);
+  // formData.append("date-time", selectedDate.textContent);
+  picProgressBar.hidden = false;
   let res = await fetch(form.action, {
     method: form.method,
-    body: new FormData(form),
+    body: formData,
   });
-  await move();
   let json = await res.json();
+  picProgressBar.hidden = true;
   console.log(json);
+  if (json.error) {
+    let toast = document.createElement("ion-toast");
+    toast.message = json.error;
+    toast.color = "danger";
+    toast.duration = 5000;
+    toast.buttons = [
+      { text: "Dismiss", role: "cancel", handler: () => toast.dismiss() },
+    ];
+    document.body.appendChild(toast);
+    toast.present();
+    toast.addEventListener("didDismiss", () => {
+      setTimeout(() => {
+        toast.remove();
+      });
+    });
+    return;
+  }
+
+  submitPhoto.disabled = true;
+  // await move();
+
+  // if()
+
   form.querySelector("img").hidden = false;
   form.querySelector("img").src = "../uploads/" + json.out_filename;
 
@@ -38,6 +70,7 @@ async function submitFoodPic(event) {
     let delBtn = document.createElement("ion-icon");
 
     select.classList.add("selectedFood");
+    select.classList.add("ion-text-wrap");
 
     label.textContent = item.label;
     delBtn.name = "close-outline";
@@ -53,6 +86,7 @@ async function submitFoodPic(event) {
       let option = document.createElement("ion-select-option");
       option.value = suggestion.id;
       option.textContent = suggestion.name;
+      option.classList.add("ion-text-wrap");
       select.appendChild(option);
     }
 
@@ -176,13 +210,15 @@ function move() {
 
 let dateTime = document.querySelector("ion-datetime");
 let selectedDate = document.querySelector("#selectedDate");
-// let dateTimeAccordion = document.querySelector("#dateTimeAccordion");
+let dateTimeAccordion = document.querySelector("#dateTimeAccordion");
+let mealTimeAccordion = document.querySelector("#mealTimeAccordion");
 
 dateTime.addEventListener("click", function () {
   console.log(dateTime.value);
   let dateTimeFormat = dateTime.value.split("T");
   console.log(dateTimeFormat);
   selectedDate.textContent = dateTimeFormat[0];
+  dateTimeAccordion.value = undefined;
 });
 
 // let selectMealTime = document.querySelector("#selectMealTime");
@@ -193,6 +229,7 @@ mealOptions.forEach((option) => {
   option.addEventListener("click", function () {
     console.log(option.value);
     selectedMealTime.textContent = option.value;
+    mealTimeAccordion.value = undefined;
   });
 });
 

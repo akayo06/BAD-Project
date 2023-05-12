@@ -3,59 +3,68 @@ import path from "path";
 // import { hashPassword, comparePassword } from "../hash";
 import { newForm } from "../formidable";
 import { knex } from "../main";
+import { HttpError } from "../error";
+import { hasLogin } from "../guards";
 
 export const usersRoute = express.Router();
 
 //post profile pic
-usersRoute.post("/food-pic", (req, res) => {
-  // const user = req.session.user;
-  // if (!user) {
-  //   res.status(401);
-  //   res.json({ error: "please login" });
-  //   return;
-  // }
-  const form = newForm();
-  form.parse(req, async (err: any, fields: any, files: any) => {
-    console.log("photo received");
-    try {
-      let image = Array.isArray(files.image) ? files.image[0] : files.image;
-      let filename = image?.newFilename;
-      console.log({ filename });
-      let { out_filename, items } = await requestToPython(filename);
-      for (let item of items) {
-        console.log(item);
-        if (item.label.includes("Burger")) {
-          item.label = "Burger";
+usersRoute.post(
+  "/food-pic",
+  // hasLogin,
+  (req, res, next) => {
+    const form = newForm();
+    form.parse(req, async (err: any, fields: any, files: any) => {
+      try {
+        if (err) {
+          throw new HttpError(500, err);
         }
-        if (item.label.includes("Twisty")) {
-          item.label = "Twisty Pasta";
+
+        let { mealDate, mealTime } = fields;
+
+        let image = Array.isArray(files.image) ? files.image[0] : files.image;
+        let filename = image?.newFilename;
+
+        if (!mealDate) throw new HttpError(400, "missing mealDate");
+        if (!mealTime) throw new HttpError(400, "missing mealTime");
+        if (!filename) throw new HttpError(400, "missing image");
+
+        let { error, out_filename, boxes } = await requestToPython(filename);
+        if (error) throw new HttpError(502, error);
+
+        for (let box of boxes) {
+          console.log(box);
+          if (box.label.includes("Burger")) {
+            box.label = "Burger";
+          }
+          if (box.label.includes("Twisty")) {
+            box.label = "Twisty Pasta";
+          }
+          let suggestions = await knex("food")
+            .select(
+              "id",
+              "name",
+              "type",
+              "energy",
+              "protein",
+              "total_fat",
+              "saturated_fat",
+              "trans_fat",
+              "carbohydrate",
+              "sugars",
+              "sodium"
+            )
+            .where("type", "like", "%" + box.label + "%");
+          box.suggestions = suggestions;
         }
-        let suggestions = await knex("food")
-          .select(
-            "id",
-            "name",
-            "type",
-            "energy",
-            "protein",
-            "total_fat",
-            "saturated_fat",
-            "trans_fat",
-            "carbohydrate",
-            "sugars",
-            "sodium"
-          )
-          .where("type", "like", "%" + item.label + "%");
-        item.suggestions = suggestions;
+
+        res.json({ out_filename, items: boxes });
+      } catch (error) {
+        next(error);
       }
-
-      res.json({ out_filename, items });
-    } catch (err) {
-      console.log(err);
-
-      res.json(err);
-    }
-  });
-});
+    });
+  }
+);
 
 async function requestToPython(in_filename: string) {
   let out_filename = in_filename.replace(".", "-out.");
@@ -70,7 +79,7 @@ async function requestToPython(in_filename: string) {
   let json = await res.json();
   return {
     out_filename,
-    items: json,
+    ...json,
   };
 }
 

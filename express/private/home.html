@@ -18,7 +18,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
     />
-    <link rel="stylesheet" href="/home.css" />
+    <link rel="stylesheet" href="/app/home.css" />
   </head>
   <body>
     <ion-app>
@@ -33,12 +33,12 @@
                     <ion-img
                       id="McFitnessLogo"
                       size="10"
-                      src="/img/McFitness.png"
+                      src="/app/img/McFitness.png"
                     ></ion-img>
                     <ion-img
                       id="avatarCircle"
                       size="3"
-                      src="/img/male.jpg"
+                      src="/app/img/male.jpg"
                     ></ion-img>
                   </ion-row>
                 </ion-grid>
@@ -62,7 +62,7 @@
               </ion-fab>
 
               <ion-card>
-                <img alt="Silhouette of mountains" src="/img/home1.jpg" />
+                <img alt="Silhouette of mountains" src="/app/img/home1.jpg" />
                 <ion-card-header>
                   <ion-card-title
                     >Join and Experience the McFitness</ion-card-title
@@ -73,7 +73,7 @@
                 <ion-card-content> McFitness is now working! </ion-card-content>
               </ion-card>
               <ion-card>
-                <img alt="Silhouette of mountains" src="/img/home1.jpg" />
+                <img alt="Silhouette of mountains" src="/app/img/home1.jpg" />
                 <ion-card-header>
                   <ion-card-title
                     >Join and Experience the McFitness</ion-card-title
@@ -84,7 +84,7 @@
                 <ion-card-content> McFitness is now working! </ion-card-content>
               </ion-card>
               <ion-card>
-                <img alt="Silhouette of mountains" src="/img/home1.jpg" />
+                <img alt="Silhouette of mountains" src="/app/img/home1.jpg" />
                 <ion-card-header>
                   <ion-card-title
                     >Join and Experience the McFitness</ion-card-title
@@ -107,28 +107,33 @@
                     <ion-img
                       id="McFitnessLogo"
                       size="10"
-                      src="/img/McFitness.png"
+                      src="/app/img/McFitness.png"
                     ></ion-img>
                     <ion-img
                       id="avatarCircle"
                       size="3"
-                      src="/img/male.jpg"
+                      src="/app/img/male.jpg"
                     ></ion-img>
                   </ion-row>
                 </ion-grid>
               </ion-toolbar>
+              <ion-progress-bar
+                id="picProgressBar"
+                hidden
+                type="indeterminate"
+              ></ion-progress-bar>
             </ion-header>
             <ion-content [fullscreen]="true" class="ion-padding">
               <form
                 onsubmit="submitFoodPic(event)"
-                id="food-pic"
+                id="foodPicForm"
                 method="POST"
                 action="/food-pic"
                 enctype="multipart/form-data"
               >
-                <ion-list id="dateTimeAccordion">
-                  <ion-accordion-group>
-                    <ion-accordion value="start">
+                <ion-list>
+                  <ion-accordion-group id="dateTimeAccordion">
+                    <ion-accordion value="dateTime">
                       <ion-item slot="header" id="dateButton">
                         <ion-label>Meal Date</ion-label>
                         <ion-label
@@ -138,6 +143,7 @@
                         <ion-note slot="end"></ion-note>
                       </ion-item>
                       <ion-datetime
+                        name="mealDate"
                         slot="content"
                         displayFormat="MMMM YY"
                         size="cover"
@@ -147,9 +153,9 @@
                   </ion-accordion-group>
                 </ion-list>
 
-                <ion-list id="mealTimeAccordion">
-                  <ion-accordion-group>
-                    <ion-accordion value="start">
+                <ion-list>
+                  <ion-accordion-group id="mealTimeAccordion">
+                    <ion-accordion value="mealTime">
                       <ion-item slot="header">
                         <ion-label>Meal Time</ion-label>
                         <ion-label
@@ -159,7 +165,11 @@
                         <ion-note slot="end"></ion-note>
                       </ion-item>
                       <ion-list slot="content">
-                        <ion-radio-group id="selectMealTime" value="">
+                        <ion-radio-group
+                          id="selectMealTime"
+                          name="mealTime"
+                          value=""
+                        >
                           <ion-item class="mealTimeSlot">
                             <ion-radio
                               class="mealTimeOption"
@@ -192,33 +202,22 @@
                     </ion-accordion>
                   </ion-accordion-group>
                 </ion-list>
-                <!-- <ion-list>
-                    <ion-item>
-                      <ion-radio
-                        aria-label="meal-time"
-                        placeholder="Select meal time"
-                        id="mealTime"
-                      >
-                        <ion-radio value="breakfast"
-                          >breakfast</ion-radio
-                        >
-                        <ion-radio value="lunch"
-                          >lunch</ion-radio
-                        >
-                        <ion-radio value="dinner"
-                          >dinner</ion-radio
-                        >
-                      </ion-radio>
-                    </ion-item>
-                  </ion-list> -->
-                <input id="upload" type="file" name="image" />
-                <input id="submitPhoto" type="submit" value="Submit" />
+
+                <input hidden id="picInput" type="file" name="image" />
+                <ion-button onclick="picInput.click()">
+                  <ion-icon slot="icon-only" name="camera"></ion-icon>
+                </ion-button>
+                <ion-button hidden id="submitPhoto" type="submit"
+                  >Submit</ion-button
+                >
+
                 <div id="myProgress" hidden="true">
                   <div id="myBar">10%</div>
                 </div>
+
                 <img id="result-poc" alt="result pic" src="" hidden="true" />
                 <ion-list class="food-items"></ion-list>
-                <div class="ion-text-end">
+                <div id="calBtnPlace" class="ion-text-end">
                   <ion-button
                     id="calculateCalories"
                     class="confirm-button hidden"
@@ -295,12 +294,12 @@
                     <ion-img
                       id="McFitnessLogo"
                       size="10"
-                      src="/img/McFitness.png"
+                      src="/app/img/McFitness.png"
                     ></ion-img>
                     <ion-img
                       id="avatarCircle"
                       size="3"
-                      src="/img/male.jpg"
+                      src="/app/img/male.jpg"
                     ></ion-img>
                   </ion-row>
                 </ion-grid>
@@ -324,12 +323,12 @@
                     <ion-img
                       id="McFitnessLogo"
                       size="10"
-                      src="/img/McFitness.png"
+                      src="/app/img/McFitness.png"
                     ></ion-img>
                     <ion-img
                       id="avatarCircle"
                       size="3"
-                      src="/img/male.jpg"
+                      src="/app/img/male.jpg"
                     ></ion-img>
                   </ion-row>
                 </ion-grid>

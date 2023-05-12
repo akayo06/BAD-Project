@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-// import { HttpError } from './express'
 import "./session";
+import { HttpError } from "./express";
 
 export function hasLogin(req: Request, res: Response, next: NextFunction) {
   // if (!req.session.user) {
@@ -27,3 +27,4 @@ export class HttpError extends Error {
     super(message);
   }
 }
+
