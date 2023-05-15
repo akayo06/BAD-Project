@@ -157,11 +157,9 @@ usersRoute.get(`/weightRecord`, async (req, res) => {
 
 usersRoute.get(`/getTodayCalories`, async (req, res) => {
   try {
-    let today = new Date().toISOString().split("T")[0];
     let todayCalories = await knex('diet_record')
       .join('food_in_diet', { 'diet_record.id': 'food_in_diet.diet_record_id' })
       .join('food', { 'food_in_diet.food_id': 'food.id' })
-      .where('diet_record.date'.split("T")[0], today)
 
     res.json({ items: todayCalories })
   } catch (error) {
