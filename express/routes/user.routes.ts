@@ -6,6 +6,7 @@ import { knex } from "../main";
 import { HttpError } from "../error";
 import { hasLogin } from "../guards";
 import { getSessionUser } from "../guards";
+import { error } from "console";
 
 export const usersRoute = express.Router();
 
@@ -87,8 +88,34 @@ async function requestToPython(in_filename: string) {
 usersRoute.post("/insert-result", async (req, res, next) => {
   console.log(req.body);
   try {
-    await knex("");
-  } catch (err) { }
+    let food_diet_record_id: { id: number }[] = await knex("diet_record")
+      .returning("id")
+      .insert([
+        {
+          date: req.body.mealDate,
+          section: req.body.mealTime.toLowerCase(),
+          active: true,
+          user_id: req.body.id,
+          // food_id: food_item.id,
+        },
+      ]);
+    console.log(food_diet_record_id);
+    for (let food_item of req.body.food_items) {
+      let food_in_diet = await knex("food_in_diet").insert([
+        {
+          diet_record_id: food_diet_record_id[0].id,
+          food_id: food_item.id,
+        },
+      ]);
+    }
+    return res.json({
+      status: true,
+      message: "You have successfully insert to diet record.",
+    });
+  } catch (err) {
+    console.log(err);
+    return res.json({ error: err });
+  }
 });
 
 usersRoute.post(`/addWeight`, async (req, res) => {
@@ -96,20 +123,19 @@ usersRoute.post(`/addWeight`, async (req, res) => {
     .select("user_id", "date")
     .where("user_id", getSessionUser(req).id)
 
-  let newWeight = await knex('shape_record')
-    .insert(
-      [
-        {
-          date: req.body.date,
-          user_id: getSessionUser(req).id,
-          height: 172,
-          weight: req.body.weight,
-        },
-      ]).returning('id');
+  let newWeight = await knex("shape_record")
+    .insert([
+      {
+        date: req.body.date,
+        user_id: getSessionUser(req).id,
+        height: 172,
+        weight: req.body.weight,
+      },
+    ])
+    .returning("id");
 
-  res.json({ dateCheck: weightRecord, newWeight })
-}
-)
+  res.json({ dateCheck: weightRecord, newWeight });
+});
 
 usersRoute.get(`/weightRecord`, async (req, res) => {
   let weightRecord = await knex("shape_record")
@@ -118,5 +144,5 @@ usersRoute.get(`/weightRecord`, async (req, res) => {
     .orderBy('date', 'desc')
     .limit(7);
 
-  res.json({ items: weightRecord })
-})
+  res.json({ items: weightRecord });
+});

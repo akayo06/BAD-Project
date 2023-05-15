@@ -124,6 +124,10 @@
               ></ion-progress-bar>
             </ion-header>
             <ion-content [fullscreen]="true" class="ion-padding">
+              <h3>
+                Please input below data and scan you meal set to record your
+                diet.
+              </h3>
               <form
                 onsubmit="submitFoodPic(event)"
                 id="foodPicForm"
@@ -203,15 +207,16 @@
                     </ion-accordion>
                   </ion-accordion-group>
                 </ion-list>
+                <div class="ion-text-center">
+                  <input hidden id="picInput" type="file" name="image" />
 
-                <input hidden id="picInput" type="file" name="image" />
-                <ion-button onclick="picInput.click()">
-                  <ion-icon slot="icon-only" name="camera"></ion-icon>
-                </ion-button>
+                  <ion-button onclick="picInput.click()">
+                    <ion-icon slot="icon-only" name="camera"></ion-icon>
+                  </ion-button>
+                </div>
                 <ion-button hidden id="submitPhoto" type="submit"
                   >Submit</ion-button
                 >
-
                 <div id="myProgress" hidden="true">
                   <div id="myBar">10%</div>
                 </div>
