@@ -410,7 +410,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/app/home.js"></script>
     <script src="/app/weightRecord.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
     <script>
       async function weightRecord() {
         let res = await fetch("/weightRecord");
@@ -455,6 +457,7 @@
       async function getTodayCalories() {
         let res = await fetch("/getTodayCalories");
         let json = await res.json();
+        console.log(json);
 
         let caloriesToday = [];
 
@@ -483,7 +486,7 @@
             labels: ["Breakfast", "Lunch", "Dinner"],
             datasets: [
               {
-                label: "Calories Today",
+                labels: "Calories Today",
                 data: caloriesToday,
                 backgroundColor: [
                   "rgb(255, 99, 132)",
@@ -494,6 +497,19 @@
               },
             ],
           },
+          // options: {
+          //   plugins: {
+          //     datalabels: {
+          //       display: true,
+          //       align: "bottom",
+          //       backgroundColor: "#ccc",
+          //       borderRadius: 3,
+          //       font: {
+          //         size: 18,
+          //       },
+          //     },
+          //   },
+          // },
         });
       }
       getTodayCalories();

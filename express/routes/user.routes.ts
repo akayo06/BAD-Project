@@ -122,7 +122,7 @@ usersRoute.post(`/addWeight`, async (req, res) => {
   try {
     let weightRecord = await knex("shape_record")
       .select("user_id", "date")
-      .where("user_id", getSessionUser(req).id)
+      .where("user_id", getSessionUser(req).id);
 
     let newWeight = await knex("shape_record")
       .insert([
@@ -146,7 +146,7 @@ usersRoute.get(`/weightRecord`, async (req, res) => {
     let weightRecord = await knex("shape_record")
       .select("weight", "user_id", "date")
       .where("user_id", getSessionUser(req).id)
-      .orderBy('date', 'desc')
+      .orderBy("date", "desc")
       .limit(7);
 
     res.json({ items: weightRecord });
@@ -157,12 +157,13 @@ usersRoute.get(`/weightRecord`, async (req, res) => {
 
 usersRoute.get(`/getTodayCalories`, async (req, res) => {
   try {
-    let todayCalories = await knex('diet_record')
-      .join('food_in_diet', { 'diet_record.id': 'food_in_diet.diet_record_id' })
-      .join('food', { 'food_in_diet.food_id': 'food.id' })
-
-    res.json({ items: todayCalories })
+    let todayCalories = await knex("diet_record")
+      .join("food_in_diet", { "diet_record.id": "food_in_diet.diet_record_id" })
+      .join("food", { "food_in_diet.food_id": "food.id" })
+      .where({ user_id: getSessionUser(req).id });
+    console.log(todayCalories);
+    res.json({ items: todayCalories });
   } catch (error) {
     return res.json({ error: error });
   }
-})
+});

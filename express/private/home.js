@@ -243,19 +243,14 @@ async function submitFoodPic(event) {
 
     result_place.appendChild(node);
     let scrollTo = document.getElementById("confirm-to-insert");
-
+    // scroll to bottom
     setTimeout(() => {
-      // scroll to bottom
-
-      scrollTo.scrollIntoView(
-        {
-          behavior: "smooth",
-          block: "end",
-          inline: "nearest",
-        },
-        1000
-      );
-    });
+      scrollTo.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "nearest",
+      });
+    }, 200);
 
     // confirm to insert data to database
     let confirmToInsert = document.querySelector("#confirm-to-insert");
