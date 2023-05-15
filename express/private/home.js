@@ -6,7 +6,7 @@ tabs.addEventListener("ionTabsDidChange", (event) => {
 tabs.addEventListener("ionTabsWillChange", (event) => {
   // console.log(event);
   if (event.detail.tab === "scan") {
-    console.log("reset scan...");
+    // console.log("reset scan...");
   }
 });
 
@@ -35,7 +35,6 @@ let idFromURL = query.get("id");
 let mealDate = document.querySelector("#mealDate");
 let selectedMealDate = document.querySelector("#selectedMealDate");
 let mealDateTimeAccordion = document.querySelector("#mealDateTimeAccordion");
-let today = new Date().toISOString().split("T")[0];
 
 mealDate.setAttribute("max", today);
 
@@ -51,7 +50,7 @@ let mealTimeAccordion = document.querySelector("#mealTimeAccordion");
 
 mealOptions.forEach((option) => {
   option.addEventListener("click", function () {
-    console.log(option.value);
+    // console.log(option.value);
     selectedMealTime.textContent = option.value;
     mealTimeAccordion.value = undefined;
   });
@@ -65,7 +64,7 @@ picInput.addEventListener("change", () => {
 
 //function when clicking upload food button
 async function submitFoodPic(event) {
-  console.log("event.preventDefault()");
+  // console.log("event.preventDefault()");
   event?.preventDefault();
   let form = foodPicForm;
   let formData = new FormData(form);
@@ -77,7 +76,7 @@ async function submitFoodPic(event) {
   });
   let json = await res.json();
   picProgressBar.hidden = true;
-  console.log(json);
+  // console.log(json);
   if (json.error) {
     let toast = document.createElement("ion-toast");
     toast.message = json.error;
@@ -148,12 +147,12 @@ async function submitFoodPic(event) {
   calculateCalories.addEventListener("click", async function () {
     let foodItems = [];
     for (let selectedFood of selectedAllFood) {
-      console.log(`select food`, selectedFood);
+      // console.log(`select food`, selectedFood);
       if (selectedFood.style.display != "none") {
         let splitArray = selectedFood.getAttribute("aria-label").split(",");
         if (splitArray.length == 1) {
           await confirmAlert(splitArray[0]);
-          console.log(splitArray[0]);
+          // console.log(splitArray[0]);
           return;
         }
         foodItems.push(splitArray[0]);
@@ -161,10 +160,10 @@ async function submitFoodPic(event) {
         //   "inline";
       }
     }
-    console.log(foodItems);
+    // console.log(foodItems);
 
     let nutrition = [];
-    console.log(json);
+    // console.log(json);
 
     for (let i = 0; i < foodItems.length; i++) {
       const compareArr = json.items[i].suggestions;
@@ -173,7 +172,7 @@ async function submitFoodPic(event) {
       nutrition.push(target[0]);
     }
 
-    console.log(nutrition);
+    // console.log(nutrition);
     // let result = form.querySelector(".calories-result");
     // for (let food of foodItems) {
     //   console.log(`food`, food);
@@ -198,7 +197,7 @@ async function submitFoodPic(event) {
     //     }
     //   }
     // }
-    console.log(nutrition);
+    // console.log(nutrition);
     let template = document.querySelector("template");
 
     let total_energy = 0;
@@ -269,7 +268,7 @@ async function submitFoodPic(event) {
         }),
       });
       let result = await res.json();
-      console.log(`result`, result);
+      // console.log(`result`, result);
 
       if (result.status) {
         insertAlert(result.message);
@@ -349,6 +348,7 @@ async function confirmAlert(missingCategory) {
   document.body.appendChild(alert);
   await alert.present();
 }
+
 
 //set up alert : logout
 async function logoutAlert(message) {

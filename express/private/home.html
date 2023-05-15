@@ -295,7 +295,7 @@
             </ion-content>
           </div>
         </ion-tab>
-        <ion-tab tab="health">
+        <ion-tab tab="health">  
           <ion-nav id="health-nav"></ion-nav>
           <div id="health-page">
             <ion-header>
@@ -317,11 +317,10 @@
               </ion-toolbar>
             </ion-header>
             <ion-content>
-              <div class="health-content">Weight calendar</div>
+              <div class="health-content">Monitor your weight</div>
               <div>
                 <canvas id="weightMyChart"></canvas>
               </div>
-              <ion-list>
                 <ion-accordion-group id="weightDateTimeAccordion">
                   <ion-accordion value="weightDate">
                     <ion-item slot="header" id="dateButton">
@@ -344,6 +343,7 @@
                 </ion-accordion-group>
 
                 <ion-item>
+                  <ion-label class="ion-text-start"></ion-label>
                   <ion-input
                     label="Your Weight (in kg) Today."
                     minlength="2"
@@ -354,10 +354,21 @@
                   </ion-input>
                   <ion-icon name="add-circle-outline" id="addWeight"></ion-icon>
                 </ion-item>
+                <ion-item><ion-label></ion-label></ion-item>
+                <ion-item><ion-label class="ion-text-center">Calculate your TDEE</ion-label></ion-item>
+                <ion-form>
+                <ion-item><ion-label class="ion-text-start left2vw floatUp">Gender</ion-label>Male<ion-toggle id="tdeeGender" checked="true" justify="end" aria-label="Enable Notifications"></ion-toggle>Female</ion-item>
+                <ion-item><ion-label class="ion-text-start"></ion-label><ion-input label="Age" id="tdeeAge" class="ion-text-end" maxlength="3" required></ion-input></ion-item>
+                <ion-item><ion-label class="ion-text-start"></ion-label><ion-input label="Height" id="tdeeHeight" class="ion-text-end" required></ion-input>cm</ion-item>
+                <ion-item><ion-label class="ion-text-start"></ion-label><ion-input label="Weight" id="tdeeWeight" class="ion-text-end" required></ion-input>kg</ion-item>
+                <ion-item><ion-label class="ion-text-start left2vw">Activity</ion-label><ion-range id="tdeeActivity" aria-label="Custom range" min="0" max="4" pin="true" ticks="true" snaps="true"></ion-range></ion-item>
+                <ion-item><ion-label></ion-label><ion-button id="calculateTDEE" >submit</ion-button></ion-item></ion-form>
+                <ion-item id="tdeeResultItem" class="hidden"><ion-label class="ion-text-start">Your daily TDEE is:</ion-label><ion-label class="ion-text-end" id="tdeeResult"></ion-label>kcal</ion-item>
               </ion-list>
             </ion-content>
           </div>
         </ion-tab>
+        
         <ion-tab tab="diet">
           <ion-nav id="diet-nav"></ion-nav>
           <div id="diet-page">
@@ -380,9 +391,49 @@
               </ion-toolbar>
             </ion-header>
             <ion-content>
-              <div class="diet-content">Calories Today</div>
               <div>
                 <canvas id="dietMyChart"></canvas>
+                <ion-item class="ion-text-center floatUp"
+                  ><ion-label id="todayConsume">Nutrition Today</ion-label></ion-item
+                >
+                <ion-row class="todayNutritionTable">
+                  <ion-col class="ion-text-start">Energy</ion-col>
+                  <ion-col class="ion-text-end" id="todayEnergy"></ion-col>
+                </ion-row>
+                <ion-row class="todayNutritionTable">
+                  <ion-col class="ion-text-start">Protein</ion-col>
+                  <ion-col class="ion-text-end" id="todayProtein"></ion-col>
+                </ion-row>
+                <ion-row class="todayNutritionTable">
+                  <ion-col class="ion-text-start">Total Fat</ion-col>
+                  <ion-col class="ion-text-end" id="todayTotal_fat"></ion-col>
+                </ion-row>
+                <ion-row class="todayNutritionTable">
+                  <ion-col class="ion-text-start">Saturated Fat</ion-col>
+                  <ion-col
+                    class="ion-text-end"
+                    id="todaySaturated_fat"
+                  ></ion-col>
+                </ion-row>
+                <ion-row class="todayNutritionTable">
+                  <ion-col class="ion-text-start">Trans Fat</ion-col>
+                  <ion-col class="ion-text-end" id="todayTrans_fat"></ion-col>
+                </ion-row>
+                <ion-row class="todayNutritionTable">
+                  <ion-col class="ion-text-start">Carbohydrates</ion-col>
+                  <ion-col
+                    class="ion-text-end"
+                    id="todayCarbohydrates"
+                  ></ion-col>
+                </ion-row>
+                <ion-row class="todayNutritionTable">
+                  <ion-col class="ion-text-start">Sugar</ion-col>
+                  <ion-col class="ion-text-end" id="todaySugar"></ion-col>
+                </ion-row>
+                <ion-row class="todayNutritionTable">
+                  <ion-col class="ion-text-start">Sodium</ion-col>
+                  <ion-col class="ion-text-end" id="todaySodium"></ion-col>
+                </ion-row>
               </div>
             </ion-content>
           </div>
@@ -408,111 +459,13 @@
       </ion-tabs>
     </ion-app>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/app/localToday.js"></script>
+    <script src="/app/utcToday.js"></script>
     <script src="/app/home.js"></script>
     <script src="/app/weightRecord.js"></script>
+    <script src="/app/tdee.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-
-    <script>
-      async function weightRecord() {
-        let res = await fetch("/weightRecord");
-        let json = await res.json();
-        var weightSet = [];
-
-        json.items.forEach((item) => {
-          weightSet.push(item.weight);
-        });
-
-        var weightLabels = [];
-
-        json.items.forEach((item) => {
-          if (item.date) {
-            weightLabels.push(
-              item.date.split("-")[1] +
-                "/" +
-                item.date.split("-")[2].split("T")[0]
-            );
-          }
-        });
-
-        new Chart(document.getElementById("weightMyChart"), {
-          type: "line",
-          data: {
-            labels: weightLabels.reverse(),
-            datasets: [
-              {
-                label: "My weight progression",
-                data: weightSet.reverse(),
-                fill: false,
-                borderColor: "rgb(75, 192, 192)",
-                tension: 0.1,
-              },
-            ],
-          },
-        });
-      }
-
-      weightRecord();
-
-      async function getTodayCalories() {
-        let res = await fetch("/getTodayCalories");
-        let json = await res.json();
-        console.log(json);
-
-        let caloriesToday = [];
-
-        let dinner = 0;
-        let lunch = 0;
-        let breakfast = 0;
-
-        for (let i = 0; i < json.items.length; i++) {
-          if (json.items[i].date.split("T")[0] == "2023-05-14") {
-            if (json.items[i].section == "breakfast") {
-              breakfast += parseFloat(json.items[i].energy);
-            } else if (json.items[i].section == "lunch") {
-              lunch += parseFloat(json.items[i].energy);
-            } else {
-              dinner += parseFloat(json.items[i].energy);
-            }
-          }
-        }
-        caloriesToday.push(breakfast);
-        caloriesToday.push(lunch);
-        caloriesToday.push(dinner);
-
-        new Chart(document.getElementById("dietMyChart"), {
-          type: "doughnut",
-          data: {
-            labels: ["Breakfast", "Lunch", "Dinner"],
-            datasets: [
-              {
-                labels: "Calories Today",
-                data: caloriesToday,
-                backgroundColor: [
-                  "rgb(255, 99, 132)",
-                  "rgb(54, 162, 235)",
-                  "rgb(255, 205, 86)",
-                ],
-                hoverOffset: 4,
-              },
-            ],
-          },
-          // options: {
-          //   plugins: {
-          //     datalabels: {
-          //       display: true,
-          //       align: "bottom",
-          //       backgroundColor: "#ccc",
-          //       borderRadius: 3,
-          //       font: {
-          //         size: 18,
-          //       },
-          //     },
-          //   },
-          // },
-        });
-      }
-      getTodayCalories();
-    </script>
+    <script src="/app/chart.js"></script>
   </body>
 </html>
