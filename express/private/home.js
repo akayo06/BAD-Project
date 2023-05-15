@@ -228,14 +228,7 @@ async function submitFoodPic(event) {
           mealDate: selectedDate.textContent,
           mealTime: selectedMealTime.textContent,
           id: idFromURL,
-          energy: total_energy,
-          protein: total_protein,
-          saturated_fat: total_saturated_fat,
-          sodium: total_sodium,
-          sugar: total_sugar,
-          total_fat: total_total_fat,
-          trans_fat: total_trans_fat,
-          carbohydrate: total_carbohydrate,
+          food_items: nutrition,
         }),
       });
     });

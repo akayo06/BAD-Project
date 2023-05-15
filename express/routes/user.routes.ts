@@ -87,27 +87,45 @@ async function requestToPython(in_filename: string) {
 usersRoute.post("/insert-result", async (req, res, next) => {
   console.log(req.body);
   try {
-    await knex("");
-  } catch (err) { }
+    // req.body.food_id.forEach((food_item) => {
+    //   let food_diet_record_id = await knex("diet_record")
+    //     .returning("id")
+    //     .insert([
+    //       {
+    //         date: req.body.mealDate,
+    //         section: req.body.mealTime.toLowerCase(),
+    //         active: true,
+    //         user_id: req.body.id,
+    //         food_id: food_item.id,
+    //       },
+    //     ]);
+    //   console.log(food_diet_record_id);
+    // });
+    // let food_in_diet = await knex("food_in_diet").insert([
+    //   {
+    //     diet_record_id: food_diet_record_id[0],
+    //     food_id: "1",
+    //   },
+    // ]);
+  } catch (err) {}
 });
 
 usersRoute.post(`/addWeight`, async (req, res) => {
-  let newWeight = await knex('shape_record')
-    .insert(
-      [
-        {
-          user_id: getSessionUser(req).id,
-          height: 172,
-          weight: req.body.weight,
-        },
-      ]).returning('id');
+  let newWeight = await knex("shape_record")
+    .insert([
+      {
+        user_id: getSessionUser(req).id,
+        height: 172,
+        weight: req.body.weight,
+      },
+    ])
+    .returning("id");
 
-  res.json(newWeight)
-}
-)
+  res.json(newWeight);
+});
 usersRoute.post("/insert-result", async (req, res, next) => {
   console.log(req.body);
   try {
     await knex("");
-  } catch (err) { }
+  } catch (err) {}
 });
