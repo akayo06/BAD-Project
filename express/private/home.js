@@ -246,7 +246,7 @@ async function submitFoodPic(event) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          mealDate: selectedDate.textContent,
+          mealDate: selectedMealDate.textContent,
           mealTime: selectedMealTime.textContent,
           id: idFromURL,
           food_items: nutrition,

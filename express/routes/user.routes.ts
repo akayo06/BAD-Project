@@ -119,30 +119,46 @@ usersRoute.post("/insert-result", async (req, res, next) => {
 });
 
 usersRoute.post(`/addWeight`, async (req, res) => {
-  let weightRecord = await knex("shape_record")
-    .select("user_id", "date")
-    .where("user_id", getSessionUser(req).id)
+  try {
+    let weightRecord = await knex("shape_record")
+      .select("user_id", "date")
+      .where("user_id", getSessionUser(req).id)
 
-  let newWeight = await knex("shape_record")
-    .insert([
-      {
-        date: req.body.date,
-        user_id: getSessionUser(req).id,
-        height: 172,
-        weight: req.body.weight,
-      },
-    ])
-    .returning("id");
+    let newWeight = await knex("shape_record")
+      .insert([
+        {
+          date: req.body.date,
+          user_id: getSessionUser(req).id,
+          height: 172,
+          weight: req.body.weight,
+        },
+      ])
+      .returning("id");
 
-  res.json({ dateCheck: weightRecord, newWeight });
+    res.json({ dateCheck: weightRecord, newWeight });
+  } catch (error) {
+    return res.json({ error: error });
+  }
 });
 
 usersRoute.get(`/weightRecord`, async (req, res) => {
-  let weightRecord = await knex("shape_record")
-    .select("weight", "user_id", "date")
-    .where("user_id", getSessionUser(req).id)
-    .orderBy('date', 'desc')
-    .limit(7);
+  try {
+    let weightRecord = await knex("shape_record")
+      .select("weight", "user_id", "date")
+      .where("user_id", getSessionUser(req).id)
+      .orderBy('date', 'desc')
+      .limit(7);
 
-  res.json({ items: weightRecord });
+    res.json({ items: weightRecord });
+  } catch (error) {
+    return res.json({ error: error });
+  }
 });
+
+usersRoute.get(`/getTodayCalories`, async (req, res) => {
+  try {
+
+  } catch (error) {
+    return res.json({ error: error });
+  }
+})
