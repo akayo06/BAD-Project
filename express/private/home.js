@@ -208,7 +208,9 @@ async function submitFoodPic(event) {
       total_trans_fat += parseFloat(food.trans_fat);
       total_carbohydrate += parseFloat(food.carbohydrate);
     }
-    document.querySelector(".total_calculated_result").innerHTML = "";
+
+    const result_place = document.querySelector(".total_calculated_result");
+    result_place.innerHTML = "";
     let node = template.content
       .querySelector("#calculatedNutritionValue")
       .cloneNode(true);
@@ -227,8 +229,11 @@ async function submitFoodPic(event) {
     node.querySelector("#sugar").textContent = total_sugar.toFixed(1) + ` g`;
     node.querySelector("#sodium").textContent = total_sodium + ` mg`;
 
-    document.querySelector(".total_calculated_result").appendChild(node);
-    window.scrollTo(0, document.body.scrollHeight);
+    result_place.appendChild(node);
+    setTimeout(() => {
+      //scroll to bottom
+      result_place.scrollIntoView(false);
+    });
 
     // confirm to insert data to database
     let confirmToInsert = document.querySelector("#confirm-to-insert");
@@ -294,7 +299,9 @@ async function insertAlert(message) {
     {
       text: "OK",
       handler: () => {
-        window.location = "/";
+        // window.location = "/";
+        let tabs = document.querySelector("ion-tabs");
+        tabs.select("diet");
       },
     },
   ];
@@ -333,7 +340,7 @@ async function logoutAlert(message) {
     {
       text: "OK",
       handler: () => {
-        // window.location = "/";
+        window.location = "/";
       },
     },
   ];
