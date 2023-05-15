@@ -84,11 +84,12 @@ async function requestToPython(in_filename: string) {
   };
 }
 
-usersRoute.post(
-  "/insert-result",
-  // hasLogin,
-  (req, res, next) => { }
-);
+usersRoute.post("/insert-result", async (req, res, next) => {
+  console.log(req.body);
+  try {
+    await knex("");
+  } catch (err) { }
+});
 
 usersRoute.post(`/addWeight`, async (req, res) => {
   let newWeight = await knex('shape_record')
@@ -104,3 +105,9 @@ usersRoute.post(`/addWeight`, async (req, res) => {
   res.json(newWeight)
 }
 )
+usersRoute.post("/insert-result", async (req, res, next) => {
+  console.log(req.body);
+  try {
+    await knex("");
+  } catch (err) { }
+});
