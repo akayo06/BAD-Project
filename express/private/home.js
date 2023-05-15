@@ -152,27 +152,40 @@ async function submitFoodPic(event) {
     console.log(foodItems);
 
     let nutrition = [];
-    // let result = form.querySelector(".calories-result");
-    for (let food of foodItems) {
-      for (let item of json.items) {
-        for (let suggestion of item.suggestions) {
-          if (food == suggestion.name) {
-            nutrition.push({
-              id: suggestion.id,
-              name: suggestion.name,
-              energy: suggestion.energy,
-              protein: suggestion.protein,
-              saturated_fat: suggestion.saturated_fat,
-              sodium: suggestion.sodium,
-              sugar: suggestion.sugar,
-              total_fat: suggestion.total_fat,
-              trans_fat: suggestion.trans_fat,
-              carbohydrate: suggestion.carbohydrate,
-            });
-          }
-        }
-      }
+    console.log(json);
+
+    for (let i = 0; i < foodItems.length; i++) {
+      const compareArr = json.items[i].suggestions;
+      const target = compareArr.filter((v) => v.name === foodItems[i]);
+
+      nutrition.push(target[0]);
     }
+
+    console.log(nutrition);
+    // let result = form.querySelector(".calories-result");
+    // for (let food of foodItems) {
+    //   console.log(`food`, food);
+    //   for (let item of json.items) {
+    //     console.log(`json.item`, item);
+    //     for (let suggestion of item.suggestions) {
+    //       console.log("suggestion", suggestion);
+    //       if (food == suggestion.name) {
+    //         nutrition.push({
+    //           id: suggestion.id,
+    //           name: suggestion.name,
+    //           energy: suggestion.energy,
+    //           protein: suggestion.protein,
+    //           saturated_fat: suggestion.saturated_fat,
+    //           sodium: suggestion.sodium,
+    //           sugar: suggestion.sugar,
+    //           total_fat: suggestion.total_fat,
+    //           trans_fat: suggestion.trans_fat,
+    //           carbohydrate: suggestion.carbohydrate,
+    //         });
+    //       }
+    //     }
+    //   }
+    // }
     console.log(nutrition);
     let template = document.querySelector("template");
 
@@ -215,7 +228,9 @@ async function submitFoodPic(event) {
     node.querySelector("#sodium").textContent = total_sodium + ` mg`;
 
     document.querySelector(".total_calculated_result").appendChild(node);
+    window.scrollTo(0, document.body.scrollHeight);
 
+    // confirm to insert data to database
     let confirmToInsert = document.querySelector("#confirm-to-insert");
 
     confirmToInsert.addEventListener("click", async () => {
@@ -231,6 +246,12 @@ async function submitFoodPic(event) {
           food_items: nutrition,
         }),
       });
+      let result = await res.json();
+      console.log(`result`, result);
+
+      if (result.status) {
+        insertAlert(result.message);
+      }
     });
   });
   //confirm to insert date to profile
@@ -264,6 +285,24 @@ selectMealTime.addEventListener("click", function () {
 });
 */
 
+//set up alert : insert the data and redirect to diet record
+async function insertAlert(message) {
+  const alert = document.createElement("ion-alert");
+  alert.header = "Message";
+  alert.message = message;
+  alert.buttons = [
+    {
+      text: "OK",
+      handler: () => {
+        window.location = "/";
+      },
+    },
+  ];
+
+  document.body.appendChild(alert);
+  await alert.present();
+}
+
 //set up alert : make sure the food are selected to calculate calories
 async function confirmAlert(missingCategory) {
   const alert = document.createElement("ion-alert");
@@ -285,14 +324,6 @@ async function confirmAlert(missingCategory) {
   await alert.present();
 }
 
-//logout
-document.getElementById("logout").addEventListener("click", async () => {
-  let res = await fetch("/logout", { method: "POST" });
-  if (res) {
-    let message = (await res.json()).message;
-    logoutAlert(message);
-  }
-});
 //set up alert : logout
 async function logoutAlert(message) {
   const alert = document.createElement("ion-alert");
@@ -302,7 +333,7 @@ async function logoutAlert(message) {
     {
       text: "OK",
       handler: () => {
-        window.location = "/";
+        // window.location = "/";
       },
     },
   ];
@@ -310,3 +341,12 @@ async function logoutAlert(message) {
   document.body.appendChild(alert);
   await alert.present();
 }
+
+//logout
+document.getElementById("logout").addEventListener("click", async () => {
+  let res = await fetch("/logout", { method: "POST" });
+  if (res) {
+    let message = (await res.json()).message;
+    logoutAlert(message);
+  }
+});
