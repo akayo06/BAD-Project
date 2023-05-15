@@ -92,25 +92,31 @@ usersRoute.post("/insert-result", async (req, res, next) => {
 });
 
 usersRoute.post(`/addWeight`, async (req, res) => {
+  let weightRecord = await knex("shape_record")
+    .select("user_id", "date")
+    .where("user_id", getSessionUser(req).id)
+
   let newWeight = await knex('shape_record')
     .insert(
       [
         {
+          date: req.body.date,
           user_id: getSessionUser(req).id,
           height: 172,
           weight: req.body.weight,
         },
       ]).returning('id');
 
-  res.json(newWeight)
+  res.json({ dateCheck: weightRecord, newWeight })
 }
 )
 
 usersRoute.get(`/weightRecord`, async (req, res) => {
   let weightRecord = await knex("shape_record")
-    .select("weight", "user_id", "updated_at")
+    .select("weight", "user_id", "date")
     .where("user_id", getSessionUser(req).id)
-    .offset(7);
+    .orderBy('date', 'desc')
+    .limit(7);
 
   res.json({ items: weightRecord })
 })

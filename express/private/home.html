@@ -132,18 +132,19 @@
                 enctype="multipart/form-data"
               >
                 <ion-list>
-                  <ion-accordion-group id="dateTimeAccordion">
+                  <ion-accordion-group id="mealDateTimeAccordion">
                     <ion-accordion value="dateTime">
                       <ion-item slot="header" id="dateButton">
                         <ion-label>Meal Date</ion-label>
                         <ion-label
-                          id="selectedDate"
+                          id="selectedMealDate"
                           class="ion-text-end"
                         ></ion-label>
                         <ion-note slot="end"></ion-note>
                       </ion-item>
                       <ion-datetime
                         name="mealDate"
+                        id="mealDate"
                         slot="content"
                         displayFormat="MMMM YY"
                         size="cover"
@@ -316,11 +317,33 @@
                 <canvas id="weightMyChart"></canvas>
               </div>
               <ion-list>
+                <ion-accordion-group id="weightDateTimeAccordion">
+                  <ion-accordion value="weightDate">
+                    <ion-item slot="header" id="dateButton">
+                      <ion-label>Weight Date</ion-label>
+                      <ion-label
+                        id="selectedWeightDate"
+                        class="ion-text-end"
+                      ></ion-label>
+                      <ion-note slot="end"></ion-note>
+                    </ion-item>
+                    <ion-datetime
+                      name="weightDate"
+                      id="weightDate"
+                      slot="content"
+                      displayFormat="MMMM YY"
+                      size="cover"
+                      presentation="date"
+                    ></ion-datetime>
+                  </ion-accordion>
+                </ion-accordion-group>
+
                 <ion-item>
                   <ion-input
                     label="Your Weight (in kg) Today."
                     minlength="2"
                     maxlength="3"
+                    class="ion-text-end"
                     id="weightAddValue"
                   >
                   </ion-input>
@@ -396,19 +419,23 @@
         var weightLabels = [];
 
         json.items.forEach((item) => {
-          weightLabels.push(item.updated_at.split("T")[0]);
+          if (item.date) {
+            weightLabels.push(
+              item.date.split("-")[1] +
+                "/" +
+                item.date.split("-")[2].split("T")[0]
+            );
+          }
         });
-
-        console.log(weightLabels);
 
         new Chart(document.getElementById("weightMyChart"), {
           type: "line",
           data: {
-            labels: weightLabels,
+            labels: weightLabels.reverse(),
             datasets: [
               {
                 label: "My weight progression",
-                data: weightSet,
+                data: weightSet.reverse(),
                 fill: false,
                 borderColor: "rgb(75, 192, 192)",
                 tension: 0.1,
