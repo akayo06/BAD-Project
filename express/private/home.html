@@ -410,7 +410,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/app/home.js"></script>
     <script src="/app/weightRecord.js"></script>
-    <script src="/app/dietRecord.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
       async function weightRecord() {
@@ -464,7 +463,7 @@
         let breakfast = 0;
 
         for (let i = 0; i < json.items.length; i++) {
-          if (json.items[i].date.split("T")[0] == today) {
+          if (json.items[i].date.split("T")[0] == "2023-05-14") {
             if (json.items[i].section == "breakfast") {
               breakfast += parseFloat(json.items[i].energy);
             } else if (json.items[i].section == "lunch") {
@@ -477,11 +476,6 @@
         caloriesToday.push(breakfast);
         caloriesToday.push(lunch);
         caloriesToday.push(dinner);
-
-        let d = new Date();
-        let n = d.getTimezoneOffset();
-
-        console.log(n);
 
         new Chart(document.getElementById("dietMyChart"), {
           type: "doughnut",
