@@ -8,7 +8,7 @@
     format("truetype");
 }
 .form {
-  height: 18.75em;
+  height: 25em;
   width: 25em;
   background: #fff;
   position: absolute;
@@ -60,7 +60,8 @@
 .bottom {
   background-color: rgb(162, 117, 48);
 }
-.login, .confirmPassword {
+.login,
+.confirmPassword {
   background-color: rgb(128, 207, 66);
   display: table;
   justify-content: center;
@@ -84,7 +85,8 @@
   height: 200px;
 }
 
-input, #signUpBtn {
+input,
+#signUpBtn {
   height: 1.25em;
   width: 8.125em;
   font-size: 2em;

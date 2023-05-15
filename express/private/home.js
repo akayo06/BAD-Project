@@ -242,9 +242,19 @@ async function submitFoodPic(event) {
     node.querySelector("#sodium").textContent = total_sodium + ` mg`;
 
     result_place.appendChild(node);
+    let scrollTo = document.getElementById("confirm-to-insert");
+
     setTimeout(() => {
-      //scroll to bottom
-      result_place.scrollIntoView(false);
+      // scroll to bottom
+
+      scrollTo.scrollIntoView(
+        {
+          behavior: "smooth",
+          block: "end",
+          inline: "nearest",
+        },
+        1000
+      );
     });
 
     // confirm to insert data to database
@@ -312,8 +322,10 @@ async function insertAlert(message) {
       text: "OK",
       handler: () => {
         // window.location = "/";
-
-        tabs.select("diet");
+        location.reload();
+        // setTimeout(() => {
+        //   tabs.select("diet");
+        // }, 3000);
       },
     },
   ];
