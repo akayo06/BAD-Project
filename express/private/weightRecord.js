@@ -1,3 +1,15 @@
+let weightDate = document.querySelector("#weightDate");
+let selectedWeightDate = document.querySelector("#selectedWeightDate");
+let weightDateTimeAccordion = document.querySelector("#weightDateTimeAccordion");
+
+weightDate.setAttribute("max", today);
+
+weightDate.addEventListener("click", function () {
+  let weightDateFormat = weightDate.value.split("T");
+  selectedWeightDate.textContent = weightDateFormat[0];
+  weightDateTimeAccordion.value = undefined;
+});
+
 const addWeight = document.querySelector("#addWeight");
 const weightAddValue = document.querySelector("#weightAddValue")
 addWeight.addEventListener("click", async function (event) {
@@ -6,6 +18,7 @@ addWeight.addEventListener("click", async function (event) {
   const formObject = {};
 
   formObject["weight"] = weightAddValue.value;
+  formObject["date"] = weightDate.value;
 
   const res = await fetch("/addWeight", {
     method: "POST",
@@ -16,28 +29,25 @@ addWeight.addEventListener("click", async function (event) {
   });
 
   const result = await res.json(); // { success: true }
-
-  if (result.status === true) {
-    await presentAlert(result.message);
-  } else {
-    await presentAlertFail(result.message);
-  }
+  
+  await presentAlert(result.message);
+  
 });
 
-async function presentAlertFail(message) {
-  const alert = document.createElement("ion-alert");
-  alert.header = "Message";
-  alert.message = "Please enter valid number.";
+// async function presentAlertFail(message) {
+//   const alert = document.createElement("ion-alert");
+//   alert.header = "Message";
+//   alert.message = "Please enter valid number.";
 
-  alert.buttons = [
-    {
-      text: "Return",
-    },
-  ];
+//   alert.buttons = [
+//     {
+//       text: "Return",
+//     },
+//   ];
 
-  document.body.appendChild(alert);
-  await alert.present();
-}
+//   document.body.appendChild(alert);
+//   await alert.present();
+// }
 
 async function presentAlert(message, id) {
   const alert = document.createElement("ion-alert");
@@ -55,3 +65,4 @@ async function presentAlert(message, id) {
   document.body.appendChild(alert);
   await alert.present();
 }
+

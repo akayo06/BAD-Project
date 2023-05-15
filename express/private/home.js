@@ -20,16 +20,17 @@ let idFromURL = query.get("id");
 
 //assign value to label when clicking date time and meal time
 
-let dateTime = document.querySelector("ion-datetime");
-let selectedDate = document.querySelector("#selectedDate");
-let dateTimeAccordion = document.querySelector("#dateTimeAccordion");
+let mealDate = document.querySelector("#mealDate");
+let selectedMealDate = document.querySelector("#selectedMealDate");
+let mealDateTimeAccordion = document.querySelector("#mealDateTimeAccordion");
+let today = new Date().toISOString().split("T")[0];
 
-dateTime.addEventListener("click", function () {
-  console.log(dateTime.value);
-  let dateTimeFormat = dateTime.value.split("T");
-  console.log(dateTimeFormat);
-  selectedDate.textContent = dateTimeFormat[0];
-  dateTimeAccordion.value = undefined;
+mealDate.setAttribute("max", today);
+
+mealDate.addEventListener("click", function () {
+  let mealDateFormat = mealDate.value.split("T");
+  selectedMealDate.textContent = mealDateFormat[0];
+  mealDateTimeAccordion.value = undefined;
 });
 
 let selectedMealTime = document.querySelector("#selectedMealTime");
