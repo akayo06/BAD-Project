@@ -73,26 +73,26 @@
                 <ion-card-content> McFitness is now working! </ion-card-content>
               </ion-card>
               <ion-card>
-                <img alt="Silhouette of mountains" src="/app/img/home1.jpg" />
+                <img alt="Silhouette of mountains" src="/app/img/home2.jpg" />
                 <ion-card-header>
-                  <ion-card-title
-                    >Join and Experience the McFitness</ion-card-title
-                  >
-                  <ion-card-subtitle>Membership</ion-card-subtitle>
+                  <ion-card-title>Practice makes you perfect!</ion-card-title>
+                  <ion-card-subtitle>Exercise</ion-card-subtitle>
                 </ion-card-header>
 
-                <ion-card-content> McFitness is now working! </ion-card-content>
+                <ion-card-content>
+                  Our yoga course will be announced soon.</ion-card-content
+                >
               </ion-card>
               <ion-card>
-                <img alt="Silhouette of mountains" src="/app/img/home1.jpg" />
+                <img alt="Silhouette of mountains" src="/app/img/home3.jpg" />
                 <ion-card-header>
-                  <ion-card-title
-                    >Join and Experience the McFitness</ion-card-title
-                  >
-                  <ion-card-subtitle>Membership</ion-card-subtitle>
+                  <ion-card-title>Eat clean, green, and lean.</ion-card-title>
+                  <ion-card-subtitle>Diet</ion-card-subtitle>
                 </ion-card-header>
 
-                <ion-card-content> McFitness is now working! </ion-card-content>
+                <ion-card-content>
+                  Use scan food to record your diet!</ion-card-content
+                >
               </ion-card>
             </ion-content>
           </div>
@@ -306,10 +306,24 @@
               </ion-toolbar>
             </ion-header>
             <ion-content>
-              <div class="health-content">Health content</div>
+              <div class="health-content">Weight calendar</div>
               <div>
                 <canvas id="weightMyChart"></canvas>
               </div>
+              <ion-list>
+                <ion-item>
+                  <ion-input
+                    label="Your Weight (in kg) Today."
+                    minlength="2"
+                    maxlength="3"
+                    id="weightAddValue"
+                  >
+                  </ion-input>
+                  <ion-button id="addWeight">
+                    <ion-icon name="add-circle-outline"></ion-icon>
+                  </ion-button>
+                </ion-item>
+              </ion-list>
             </ion-content>
           </div>
         </ion-tab>
@@ -364,6 +378,7 @@
     </ion-app>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/app/home.js"></script>
+    <script src="/app/addWeight.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
       new Chart(document.getElementById("weightMyChart"), {

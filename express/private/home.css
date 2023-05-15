@@ -83,3 +83,7 @@ button.alert-button.alert-button-confirm {
 [hidden] {
   visibility: hidden;
 }
+
+.floatUp {
+  z-index: 999;
+}

@@ -5,6 +5,7 @@ import { newForm } from "../formidable";
 import { knex } from "../main";
 import { HttpError } from "../error";
 import { hasLogin } from "../guards";
+import { getSessionUser } from "../guards";
 
 export const usersRoute = express.Router();
 
@@ -86,5 +87,20 @@ async function requestToPython(in_filename: string) {
 usersRoute.post(
   "/insert-result",
   // hasLogin,
-  (req, res, next) => {}
+  (req, res, next) => { }
 );
+
+usersRoute.post(`/addWeight`, async (req, res) => {
+  let newWeight = await knex('shape_record')
+    .insert(
+      [
+        {
+          user_id: getSessionUser(req).id,
+          height: 172,
+          weight: req.body.weight,
+        },
+      ]).returning('id');
+
+  res.json(newWeight)
+}
+)
