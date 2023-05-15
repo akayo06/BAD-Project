@@ -105,9 +105,12 @@ usersRoute.post(`/addWeight`, async (req, res) => {
   res.json(newWeight)
 }
 )
-usersRoute.post("/insert-result", async (req, res, next) => {
-  console.log(req.body);
-  try {
-    await knex("");
-  } catch (err) { }
-});
+
+usersRoute.get(`/weightRecord`, async (req, res) => {
+  let weightRecord = await knex("shape_record")
+    .select("weight", "user_id", "updated_at")
+    .where("user_id", getSessionUser(req).id)
+    .offset(7);
+
+  res.json({ items: weightRecord })
+})

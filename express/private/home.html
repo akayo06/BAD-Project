@@ -324,9 +324,7 @@
                     id="weightAddValue"
                   >
                   </ion-input>
-                  <ion-button id="addWeight">
-                    <ion-icon name="add-circle-outline"></ion-icon>
-                  </ion-button>
+                  <ion-icon name="add-circle-outline" id="addWeight"></ion-icon>
                 </ion-item>
               </ion-list>
             </ion-content>
@@ -354,7 +352,7 @@
               </ion-toolbar>
             </ion-header>
             <ion-content>
-              <div class="diet-content">Diet content</div>
+              <div class="diet-content">Calories Today</div>
               <div>
                 <canvas id="dietMyChart"></canvas>
               </div>
@@ -383,33 +381,52 @@
     </ion-app>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/app/home.js"></script>
-    <script src="/app/addWeight.js"></script>
+    <script src="/app/weightRecord.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-      new Chart(document.getElementById("weightMyChart"), {
-        type: "line",
-        data: {
-          labels: ["Jan", "Feb", "Mar"],
-          datasets: [
-            {
-              label: "My First Dataset",
-              data: [65, 59, 80, 81, 56, 55, 40],
-              fill: false,
-              borderColor: "rgb(75, 192, 192)",
-              tension: 0.1,
-            },
-          ],
-        },
-      });
+      async function weightRecord() {
+        let res = await fetch("/weightRecord");
+        let json = await res.json();
+        var weightSet = [];
 
+        json.items.forEach((item) => {
+          weightSet.push(item.weight);
+        });
+
+        var weightLabels = [];
+
+        json.items.forEach((item) => {
+          weightLabels.push(item.updated_at.split("T")[0]);
+        });
+
+        console.log(weightLabels);
+
+        new Chart(document.getElementById("weightMyChart"), {
+          type: "line",
+          data: {
+            labels: weightLabels,
+            datasets: [
+              {
+                label: "My weight progression",
+                data: weightSet,
+                fill: false,
+                borderColor: "rgb(75, 192, 192)",
+                tension: 0.1,
+              },
+            ],
+          },
+        });
+      }
+
+      weightRecord();
       new Chart(document.getElementById("dietMyChart"), {
         type: "doughnut",
         data: {
           labels: ["Breakfast", "Lunch", "Dinner"],
           datasets: [
             {
-              label: "My First Dataset",
-              data: [300, 50, 100],
+              label: "Calories Today",
+              data: [1000, 800, 500],
               backgroundColor: [
                 "rgb(255, 99, 132)",
                 "rgb(54, 162, 235)",

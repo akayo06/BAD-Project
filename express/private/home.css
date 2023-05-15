@@ -87,3 +87,7 @@ button.alert-button.alert-button-confirm {
 .floatUp {
   z-index: 999;
 }
+
+#addWeight:active {
+  color:blue;
+}
