@@ -157,7 +157,11 @@ usersRoute.get(`/weightRecord`, async (req, res) => {
 
 usersRoute.get(`/getTodayCalories`, async (req, res) => {
   try {
+    let todayCalories = await knex('diet_record')
+      .join('food_in_diet', { 'diet_record.id': 'food_in_diet.diet_record_id' })
+      .join('food', { 'food_in_diet.food_id': 'food.id' })
 
+    res.json({ items: todayCalories })
   } catch (error) {
     return res.json({ error: error });
   }

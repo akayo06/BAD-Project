@@ -451,24 +451,52 @@
       }
 
       weightRecord();
-      new Chart(document.getElementById("dietMyChart"), {
-        type: "doughnut",
-        data: {
-          labels: ["Breakfast", "Lunch", "Dinner"],
-          datasets: [
-            {
-              label: "Calories Today",
-              data: [1000, 800, 500],
-              backgroundColor: [
-                "rgb(255, 99, 132)",
-                "rgb(54, 162, 235)",
-                "rgb(255, 205, 86)",
-              ],
-              hoverOffset: 4,
-            },
-          ],
-        },
-      });
+
+      async function getTodayCalories() {
+        let res = await fetch("/getTodayCalories");
+        let json = await res.json();
+
+        let caloriesToday = [];
+
+        let dinner = 0;
+        let lunch = 0;
+        let breakfast = 0;
+
+        for (let i = 0; i < json.items.length; i++) {
+          if (json.items[i].date.split("T")[0] == "2023-05-14") {
+            if (json.items[i].section == "breakfast") {
+              breakfast += parseFloat(json.items[i].energy);
+            } else if (json.items[i].section == "lunch") {
+              lunch += parseFloat(json.items[i].energy);
+            } else {
+              dinner += parseFloat(json.items[i].energy);
+            }
+          }
+        }
+        caloriesToday.push(breakfast);
+        caloriesToday.push(lunch);
+        caloriesToday.push(dinner);
+
+        new Chart(document.getElementById("dietMyChart"), {
+          type: "doughnut",
+          data: {
+            labels: ["Breakfast", "Lunch", "Dinner"],
+            datasets: [
+              {
+                label: "Calories Today",
+                data: caloriesToday,
+                backgroundColor: [
+                  "rgb(255, 99, 132)",
+                  "rgb(54, 162, 235)",
+                  "rgb(255, 205, 86)",
+                ],
+                hoverOffset: 4,
+              },
+            ],
+          },
+        });
+      }
+      getTodayCalories();
     </script>
   </body>
 </html>
