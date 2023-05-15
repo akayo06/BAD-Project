@@ -1,3 +1,15 @@
+let tabs = document.querySelector("ion-tabs");
+
+tabs.addEventListener("ionTabsDidChange", (event) => {
+  // console.log(event);
+});
+tabs.addEventListener("ionTabsWillChange", (event) => {
+  // console.log(event);
+  if (event.detail.tab === "scan") {
+    console.log("reset scan...");
+  }
+});
+
 const homeNav = document.querySelector("#home-nav");
 const homePage = document.querySelector("#home-page");
 homeNav.root = homePage;
@@ -57,8 +69,7 @@ async function submitFoodPic(event) {
   event?.preventDefault();
   let form = foodPicForm;
   let formData = new FormData(form);
-  // formData.append("meal-time", selectedMealTime.textContent);
-  // formData.append("date-time", selectedDate.textContent);
+
   picProgressBar.hidden = false;
   let res = await fetch(form.action, {
     method: form.method,
@@ -301,7 +312,7 @@ async function insertAlert(message) {
       text: "OK",
       handler: () => {
         // window.location = "/";
-        let tabs = document.querySelector("ion-tabs");
+
         tabs.select("diet");
       },
     },
