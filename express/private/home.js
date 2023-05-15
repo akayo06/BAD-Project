@@ -13,12 +13,44 @@ healthNav.root = healthPage;
 const dietNav = document.querySelector("#diet-nav");
 const dietPage = document.querySelector("#diet-page");
 dietNav.root = dietPage;
-//disable upload picture if once upload
+
+//get params
+let query = new URL(document.location).searchParams;
+let idFromURL = query.get("id");
+
+//assign value to label when clicking date time and meal time
+
+let dateTime = document.querySelector("ion-datetime");
+let selectedDate = document.querySelector("#selectedDate");
+let dateTimeAccordion = document.querySelector("#dateTimeAccordion");
+
+dateTime.addEventListener("click", function () {
+  console.log(dateTime.value);
+  let dateTimeFormat = dateTime.value.split("T");
+  console.log(dateTimeFormat);
+  selectedDate.textContent = dateTimeFormat[0];
+  dateTimeAccordion.value = undefined;
+});
+
+let selectedMealTime = document.querySelector("#selectedMealTime");
+let mealOptions = document.querySelectorAll(".mealTimeOption");
+let mealTimeAccordion = document.querySelector("#mealTimeAccordion");
+
+mealOptions.forEach((option) => {
+  option.addEventListener("click", function () {
+    console.log(option.value);
+    selectedMealTime.textContent = option.value;
+    mealTimeAccordion.value = undefined;
+  });
+});
+
+//disable upload button if uploading photo
 picInput.addEventListener("change", () => {
   submitPhoto.disabled = false;
   submitFoodPic();
 });
 
+//function when clicking upload food button
 async function submitFoodPic(event) {
   console.log("event.preventDefault()");
   event?.preventDefault();
@@ -96,42 +128,12 @@ async function submitFoodPic(event) {
     node.appendChild(delBtn);
   }
 
-  let dateTime = document.querySelector("ion-datetime");
-  let selectedDate = document.querySelector("#selectedDate");
-  let dateTimeAccordion = document.querySelector("#dateTimeAccordion");
-  let mealTimeAccordion = document.querySelector("#mealTimeAccordion");
-
-  dateTime.addEventListener("click", function () {
-    console.log(dateTime.value);
-    let dateTimeFormat = dateTime.value.split("T");
-    console.log(dateTimeFormat);
-    selectedDate.textContent = dateTimeFormat[0];
-    dateTimeAccordion.value = undefined;
-  });
-
-  // let selectMealTime = document.querySelector("#selectMealTime");
-  let selectedMealTime = document.querySelector("#selectedMealTime");
-  let mealOptions = document.querySelectorAll(".mealTimeOption");
-
-  mealOptions.forEach((option) => {
-    option.addEventListener("click", function () {
-      console.log(option.value);
-      selectedMealTime.textContent = option.value;
-      mealTimeAccordion.value = undefined;
-    });
-  });
-
-  //display calculate calories button
-
   document.querySelector("#calculateCalories").style.display = "inline-block";
 
-  //click calculate calories button
   let calculateCalories = document.querySelector("#calculateCalories");
   let selectedAllFood = document.querySelectorAll(".selectedFood");
 
   calculateCalories.addEventListener("click", async function () {
-    let res = await fetch("/insert-result", { method: "POST" });
-
     let foodItems = [];
     for (let selectedFood of selectedAllFood) {
       console.log(`select food`, selectedFood);
@@ -213,29 +215,54 @@ async function submitFoodPic(event) {
     node.querySelector("#sodium").textContent = total_sodium + ` mg`;
 
     document.querySelector(".total_calculated_result").appendChild(node);
+
+    let confirmToInsert = document.querySelector("#confirm-to-insert");
+
+    confirmToInsert.addEventListener("click", async () => {
+      let res = await fetch(`/insert-result`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          mealDate: selectedDate.textContent,
+          mealTime: selectedMealTime.textContent,
+          id: idFromURL,
+          energy: total_energy,
+          protein: total_protein,
+          saturated_fat: total_saturated_fat,
+          sodium: total_sodium,
+          sugar: total_sugar,
+          total_fat: total_total_fat,
+          trans_fat: total_trans_fat,
+          carbohydrate: total_carbohydrate,
+        }),
+      });
+    });
   });
+  //confirm to insert date to profile
 }
 
-function move() {
-  return new Promise((resolve, reject) => {
-    document.querySelector("#myProgress").hidden = false;
-    let elem = document.getElementById("myBar");
-    let width = 10;
-    let id = setInterval(frame, 10);
-    function frame() {
-      if (width >= 100) {
-        clearInterval(id);
-        // document.querySelector("#myProgress").hidden = true;
-        resolve();
-      } else {
-        width++;
-        elem.style.width = width + "%";
-        //open.spotify.com/playlist/14TaTmR3N9PGEmdbiRKoJS
-        https: elem.innerHTML = width + "%";
-      }
-    }
-  });
-}
+// function move() {
+//   return new Promise((resolve, reject) => {
+//     document.querySelector("#myProgress").hidden = false;
+//     let elem = document.getElementById("myBar");
+//     let width = 10;
+//     let id = setInterval(frame, 10);
+//     function frame() {
+//       if (width >= 100) {
+//         clearInterval(id);
+//         // document.querySelector("#myProgress").hidden = true;
+//         resolve();
+//       } else {
+//         width++;
+//         elem.style.width = width + "%";
+//         //open.spotify.com/playlist/14TaTmR3N9PGEmdbiRKoJS
+//         https: elem.innerHTML = width + "%";
+//       }
+//     }
+//   });
+// }
 
 /*
 selectMealTime.addEventListener("click", function () {
@@ -243,17 +270,8 @@ selectMealTime.addEventListener("click", function () {
   selectedMealTime.textContent = selectMealTime.value;
 });
 */
-// dateTimeAccordion.addEventListener("ionChange", function () {
-//   console.log("changed");
-//   let calendar = document.querySelector("ion-datetime");
-//   console.log(calendar);
-//   calendar.addEventListener("ionChange", function () {
-//     console.log(dateTime.value);
-//   });
-// });
 
-//alert button setup
-
+//set up alert : make sure the food are selected to calculate calories
 async function confirmAlert(missingCategory) {
   const alert = document.createElement("ion-alert");
   alert.header = "Error";
@@ -279,11 +297,11 @@ document.getElementById("logout").addEventListener("click", async () => {
   let res = await fetch("/logout", { method: "POST" });
   if (res) {
     let message = (await res.json()).message;
-    presentAlert(message);
+    logoutAlert(message);
   }
 });
-
-async function presentAlert(message) {
+//set up alert : logout
+async function logoutAlert(message) {
   const alert = document.createElement("ion-alert");
   alert.header = "Message";
   alert.message = message;
