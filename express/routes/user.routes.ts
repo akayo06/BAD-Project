@@ -51,7 +51,7 @@ usersRoute.post(
               "saturated_fat",
               "trans_fat",
               "carbohydrate",
-              "sugars",
+              "sugar",
               "sodium"
             )
             .where("type", "like", "%" + box.label + "%");
@@ -83,3 +83,8 @@ async function requestToPython(in_filename: string) {
   };
 }
 
+usersRoute.post(
+  "/insert-result",
+  // hasLogin,
+  (req, res, next) => {}
+);

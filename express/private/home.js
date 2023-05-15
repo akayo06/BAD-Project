@@ -13,7 +13,7 @@ healthNav.root = healthPage;
 const dietNav = document.querySelector("#diet-nav");
 const dietPage = document.querySelector("#diet-page");
 dietNav.root = dietPage;
-
+//disable upload picture if once upload
 picInput.addEventListener("change", () => {
   submitPhoto.disabled = false;
   submitFoodPic();
@@ -94,15 +94,44 @@ async function submitFoodPic(event) {
     node.appendChild(select);
     items.appendChild(node);
     node.appendChild(delBtn);
-
-    // form.querySelector(".items").innerHTML += item.label;
   }
+
+  let dateTime = document.querySelector("ion-datetime");
+  let selectedDate = document.querySelector("#selectedDate");
+  let dateTimeAccordion = document.querySelector("#dateTimeAccordion");
+  let mealTimeAccordion = document.querySelector("#mealTimeAccordion");
+
+  dateTime.addEventListener("click", function () {
+    console.log(dateTime.value);
+    let dateTimeFormat = dateTime.value.split("T");
+    console.log(dateTimeFormat);
+    selectedDate.textContent = dateTimeFormat[0];
+    dateTimeAccordion.value = undefined;
+  });
+
+  // let selectMealTime = document.querySelector("#selectMealTime");
+  let selectedMealTime = document.querySelector("#selectedMealTime");
+  let mealOptions = document.querySelectorAll(".mealTimeOption");
+
+  mealOptions.forEach((option) => {
+    option.addEventListener("click", function () {
+      console.log(option.value);
+      selectedMealTime.textContent = option.value;
+      mealTimeAccordion.value = undefined;
+    });
+  });
+
+  //display calculate calories button
 
   document.querySelector("#calculateCalories").style.display = "inline-block";
 
+  //click calculate calories button
   let calculateCalories = document.querySelector("#calculateCalories");
   let selectedAllFood = document.querySelectorAll(".selectedFood");
+
   calculateCalories.addEventListener("click", async function () {
+    let res = await fetch("/insert-result", { method: "POST" });
+
     let foodItems = [];
     for (let selectedFood of selectedAllFood) {
       console.log(`select food`, selectedFood);
@@ -133,7 +162,7 @@ async function submitFoodPic(event) {
               protein: suggestion.protein,
               saturated_fat: suggestion.saturated_fat,
               sodium: suggestion.sodium,
-              sugars: suggestion.sugars,
+              sugar: suggestion.sugar,
               total_fat: suggestion.total_fat,
               trans_fat: suggestion.trans_fat,
               carbohydrate: suggestion.carbohydrate,
@@ -149,7 +178,7 @@ async function submitFoodPic(event) {
     let total_protein = 0;
     let total_saturated_fat = 0;
     let total_sodium = 0;
-    let total_sugars = 0;
+    let total_sugar = 0;
     let total_total_fat = 0;
     let total_trans_fat = 0;
     let total_carbohydrate = 0;
@@ -159,7 +188,7 @@ async function submitFoodPic(event) {
       total_protein += parseFloat(food.protein);
       total_saturated_fat += parseFloat(food.saturated_fat);
       total_sodium += parseFloat(food.sodium);
-      total_sugars += parseFloat(food.sugars);
+      total_sugar += parseFloat(food.sugar);
       total_total_fat += parseFloat(food.total_fat);
       total_trans_fat += parseFloat(food.trans_fat);
       total_carbohydrate += parseFloat(food.carbohydrate);
@@ -180,7 +209,7 @@ async function submitFoodPic(event) {
       total_trans_fat.toFixed(1) + ` g`;
     node.querySelector("#carbohydrates").textContent =
       total_carbohydrate.toFixed(1) + ` g`;
-    node.querySelector("#sugar").textContent = total_sugars.toFixed(1) + ` g`;
+    node.querySelector("#sugar").textContent = total_sugar.toFixed(1) + ` g`;
     node.querySelector("#sodium").textContent = total_sodium + ` mg`;
 
     document.querySelector(".total_calculated_result").appendChild(node);
@@ -207,31 +236,6 @@ function move() {
     }
   });
 }
-
-let dateTime = document.querySelector("ion-datetime");
-let selectedDate = document.querySelector("#selectedDate");
-let dateTimeAccordion = document.querySelector("#dateTimeAccordion");
-let mealTimeAccordion = document.querySelector("#mealTimeAccordion");
-
-dateTime.addEventListener("click", function () {
-  console.log(dateTime.value);
-  let dateTimeFormat = dateTime.value.split("T");
-  console.log(dateTimeFormat);
-  selectedDate.textContent = dateTimeFormat[0];
-  dateTimeAccordion.value = undefined;
-});
-
-// let selectMealTime = document.querySelector("#selectMealTime");
-let selectedMealTime = document.querySelector("#selectedMealTime");
-let mealOptions = document.querySelectorAll(".mealTimeOption");
-
-mealOptions.forEach((option) => {
-  option.addEventListener("click", function () {
-    console.log(option.value);
-    selectedMealTime.textContent = option.value;
-    mealTimeAccordion.value = undefined;
-  });
-});
 
 /*
 selectMealTime.addEventListener("click", function () {
@@ -264,6 +268,32 @@ async function confirmAlert(missingCategory) {
     //   text: "Yes",
     //   cssClass: "alert-button-confirm",
     // },
+  ];
+
+  document.body.appendChild(alert);
+  await alert.present();
+}
+
+//logout
+document.getElementById("logout").addEventListener("click", async () => {
+  let res = await fetch("/logout", { method: "POST" });
+  if (res) {
+    let message = (await res.json()).message;
+    presentAlert(message);
+  }
+});
+
+async function presentAlert(message) {
+  const alert = document.createElement("ion-alert");
+  alert.header = "Message";
+  alert.message = message;
+  alert.buttons = [
+    {
+      text: "OK",
+      handler: () => {
+        window.location = "/";
+      },
+    },
   ];
 
   document.body.appendChild(alert);

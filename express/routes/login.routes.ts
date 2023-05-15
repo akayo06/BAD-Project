@@ -6,6 +6,7 @@ import { getString, getPhone, HttpError } from "../express";
 export const loginRoute = express.Router();
 
 loginRoute.post(`/login`, async (req, res) => {
+  console.log(req.body);
   let user_profile = await knex("user")
     .select("email", "password", "id")
     .where("email", req.body.email);
@@ -14,9 +15,14 @@ loginRoute.post(`/login`, async (req, res) => {
     return res.json({ status: false, message: "This email is not exist" });
   }
 
-  if (!(await comparePassword({ password: getString(req, "password"), password_hash: user_profile[0].password }))
+  if (
+    !(await comparePassword({
+      password: getString(req, "password"),
+      password_hash: user_profile[0].password,
+    }))
   ) {
-    throw new HttpError(403, "wrong username or password");
+    return res.json({ status: false, message: "Password is wrong" });
+    // throw new HttpError(403, "wrong username or password");
   }
 
   // if (req.body.password != user_profile[0].password) {
@@ -27,8 +33,9 @@ loginRoute.post(`/login`, async (req, res) => {
     email: req.body.email,
     id: user_profile[0].id,
   };
-  console.log("123");
+
   req.session.save();
+  console.log("session saved");
 
   return res.json({
     status: true,
@@ -36,7 +43,6 @@ loginRoute.post(`/login`, async (req, res) => {
     id: user_profile[0].id,
   });
 });
-
 
 loginRoute.get("/role", (req, res) => {
   res.json({
@@ -49,16 +55,20 @@ loginRoute.get("/role", (req, res) => {
   // })
 });
 
-loginRoute.post("/logout", (req, res) => {
-  if (!req.session.user) {
-    res.json({ role: "guest" });
-    return;
-  }
-  req.session.destroy((err) => {
-    if (err) {
-      res.json({ role: "user" });
-    } else {
-      res.json({ role: "guest" });
-    }
-  });
-}); 
+loginRoute.post(`/logout`, async (req, res) => {
+  req.session.destroy(() => {});
+  res.json({ message: "logout success" });
+});
+// loginRoute.post("/logout", (req, res) => {
+//   if (!req.session.user) {
+//     res.json({ role: "guest" });
+//     return;
+//   }
+//   req.session.destroy((err) => {
+//     if (err) {
+//       res.json({ role: "user" });
+//     } else {
+//       res.json({ role: "guest" });
+//     }
+//   });
+// });
