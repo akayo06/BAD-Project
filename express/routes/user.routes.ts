@@ -23,6 +23,7 @@ usersRoute.post(
         }
 
         let { mealDate, mealTime } = fields;
+        console.log(fields);
 
         let image = Array.isArray(files.image) ? files.image[0] : files.image;
         let filename = image?.newFilename;
@@ -86,7 +87,6 @@ async function requestToPython(in_filename: string) {
 }
 
 usersRoute.post("/insert-result", async (req, res, next) => {
-  console.log(req.body);
   try {
     let food_diet_record_id: { id: number }[] = await knex("diet_record")
       .returning("id")
@@ -99,7 +99,7 @@ usersRoute.post("/insert-result", async (req, res, next) => {
           // food_id: food_item.id,
         },
       ]);
-    console.log(food_diet_record_id);
+
     for (let food_item of req.body.food_items) {
       let food_in_diet = await knex("food_in_diet").insert([
         {
@@ -161,7 +161,6 @@ usersRoute.get(`/getTodayCalories`, async (req, res) => {
       .join("food_in_diet", { "diet_record.id": "food_in_diet.diet_record_id" })
       .join("food", { "food_in_diet.food_id": "food.id" })
       .where({ user_id: getSessionUser(req).id });
-    console.log(todayCalories);
     res.json({ items: todayCalories });
   } catch (error) {
     return res.json({ error: error });
