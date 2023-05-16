@@ -20,8 +20,6 @@ async function weightRecord() {
     }
   });
 
-  console.log(weightLabels);
-
   new Chart(document.getElementById("weightMyChart"), {
     type: "line",
     data: {
@@ -44,7 +42,6 @@ weightRecord();
 async function getTodayCalories() {
   let res = await fetch("/getTodayCalories");
   let json = await res.json();
-  console.log(json);
   let caloriesToday = [];
 
   let dinner = 0;
@@ -52,21 +49,21 @@ async function getTodayCalories() {
   let breakfast = 0;
   //might need to alter
   for (let i = 0; i < json.items.length; i++) {
-    if (json.items[i].date.split("T")[0] == utcToday) {
-      if (json.items[i].section == "breakfast") {
-        breakfast += parseFloat(json.items[i].energy);
-      } else if (json.items[i].section == "lunch") {
-        lunch += parseFloat(json.items[i].energy);
-      } else {
-        dinner += parseFloat(json.items[i].energy);
+        if (dateToLocal(json.items[i].date) == today432Format) {
+          if (json.items[i].section == "breakfast") {
+            breakfast += parseFloat(json.items[i].energy);
+          } else if (json.items[i].section == "lunch") {
+            lunch += parseFloat(json.items[i].energy);
+          } else if (json.items[i].section == "dinner") {
+            dinner += parseFloat(json.items[i].energy);
+          }    
+        }
+        
       }
-    }
-  }
-  console.log(utcToday);
+  
   caloriesToday.push(breakfast);
   caloriesToday.push(lunch);
   caloriesToday.push(dinner);
-  console.log(caloriesToday);
 
   let caloriesLabel = ["Breakfast", "Lunch", "Dinner"];
   let caloriesBG = [
@@ -106,7 +103,7 @@ async function getTodayCalories() {
   let total_carbohydrate = 0;
 
   for (let i = 0; i < json.items.length; i++) {
-    if (json.items[i].date.split("T")[0] == utcToday) {
+    if (dateToLocal(json.items[i].date) == today432Format) {
       total_energy += parseFloat(json.items[i].energy);
       total_protein += parseFloat(json.items[i].protein);
       total_saturated_fat += parseFloat(json.items[i].saturated_fat);
@@ -116,7 +113,8 @@ async function getTodayCalories() {
       total_trans_fat += parseFloat(json.items[i].trans_fat);
       total_carbohydrate += parseFloat(json.items[i].carbohydrate);
     }
-  }
+
+  
 
   document.querySelector("#todayEnergy").textContent = total_energy + ` kcal`;
   document.querySelector("#todayProtein").textContent =
@@ -132,5 +130,6 @@ async function getTodayCalories() {
   document.querySelector("#todaySugar").textContent =
     total_sugar.toFixed(1) + ` g`;
   document.querySelector("#todaySodium").textContent = total_sodium + ` mg`;
-}
+}}
 getTodayCalories();
+
