@@ -27,6 +27,12 @@ class Task(BaseModel):
 
 app = FastAPI()
 
+@app.get("/")
+def read_root():
+    return {
+        "Hello": "World",
+        "name": 123
+    }
 
 @app.post("/predict")
 async def predict_task(task: Task):
