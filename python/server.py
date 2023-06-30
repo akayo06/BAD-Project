@@ -11,6 +11,7 @@ import cv2
 # hub_model.load_state_dict(model.float().state_dict())  # load state_dict
 # hub_model.names = model.names  # class names
 # model = hub_model.to(device)
+# command line= uvicorn server:app --reload
 
 from ultralytics import YOLO
 model = YOLO('./best.pt') # Your model patH
